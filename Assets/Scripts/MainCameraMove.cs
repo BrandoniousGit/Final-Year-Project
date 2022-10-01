@@ -7,9 +7,9 @@ using TMPro;
 
 public class MainCameraMove : MonoBehaviour
 {
-    public TextMeshProUGUI interactionText;
-    Interactable iOScript;
-    public float xSens, ySens;
+    public TextMeshProUGUI interactionText, powerText;
+    public Interactable iOScript;
+    public float xSens, ySens, moveSpeed, moveMulti, throwPower, interactDistance;
     private float x, y;
 
     private void Start()
@@ -20,36 +20,74 @@ public class MainCameraMove : MonoBehaviour
 
     void UserInput()
     {
+        //Rotational Movement
         x += Input.GetAxis("Mouse X") * xSens;
         y -= Input.GetAxis("Mouse Y") * ySens;
 
         y = Mathf.Clamp(y, -80.0f, 80.0f);
 
         transform.eulerAngles = new Vector3(y, x, 0);
+
+        //Adjusting Throw Power
+        if (Input.GetKey(KeyCode.Q)) { throwPower += 0.1f; }
+        if (Input.GetKey(KeyCode.E)) { throwPower -= 0.1f; }
+
+        //Capped throw power
+        if (throwPower >= 25) { throwPower = 25; }
+        if (throwPower <= 0) { throwPower = 0; }
+
+        //Setting GUI Text
+        powerText.text = "Throw Power: " + Mathf.Round(throwPower);
+
+        //Freefly Cam
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveMulti = 1.5f;
+        }
+        else { moveMulti = 1.0f; }
+
+        if (Input.GetKey(KeyCode.W)) { transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * moveSpeed * moveMulti; }
+        if (Input.GetKey(KeyCode.S)) { transform.position += transform.TransformDirection(Vector3.back) * Time.deltaTime * moveSpeed * moveMulti; }
+        if (Input.GetKey(KeyCode.A)) { transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * moveSpeed * moveMulti; }
+        if (Input.GetKey(KeyCode.D)) { transform.position += transform.TransformDirection(Vector3.right) * Time.deltaTime * moveSpeed * moveMulti; }
     }
 
     void UserInteract()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) == true)
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        //Tests for interactable object infront of camera
+        if (Physics.Raycast(ray, out hit, interactDistance))
         {
             if (hit.transform.GetComponent<Interactable>() != null)
             {
                 iOScript = hit.transform.GetComponent<Interactable>();
+                HandleInteraction(iOScript);
                 interactionText.text = iOScript.GetDescription();
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    iOScript.Interact();
-                }
             }
-            else
-            {
-                interactionText.text = "";
-            }
+            else { interactionText.text = ""; }
         }
         else
         {
             interactionText.text = "";
+        }
+    }
+
+    void HandleInteraction(Interactable interactable)
+    {
+        switch (interactable.interactionType)
+        {
+            case Interactable.InteractionType.Press:
+                if (Input.GetMouseButtonDown(1))
+                {
+                    interactable.Interact();
+                }
+                break;
+            case Interactable.InteractionType.Hold:
+                Debug.Log("Yeah");
+                break;
+            default:
+                throw new System.Exception("Unsupported type of interactable.");
         }
     }
 

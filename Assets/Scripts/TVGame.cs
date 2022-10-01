@@ -12,7 +12,7 @@ public class TVGame : Interactable
 
     public override string GetDescription()
     {
-        string description = "Press 'E' to interact.";
+        string description = "Press 'RMB' to interact.";
 
         return description;
     }
@@ -29,7 +29,8 @@ public class TVGame : Interactable
 
     private void Update()
     {
-        float xMove = Input
+        float xMove = Input.GetAxis("Horizontal");
+        float yMove = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Escape) && isSelected == true)
         {
