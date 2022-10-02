@@ -9,7 +9,7 @@ public class MainCameraMove : MonoBehaviour
 {
     public TextMeshProUGUI interactionText, powerText;
     public Interactable iOScript;
-    public float xSens, ySens, moveSpeed, moveMulti, throwPower, interactDistance;
+    public float xSens, ySens, throwPower, interactDistance;
     private float x, y;
 
     private void Start()
@@ -29,8 +29,8 @@ public class MainCameraMove : MonoBehaviour
         transform.eulerAngles = new Vector3(y, x, 0);
 
         //Adjusting Throw Power
-        if (Input.GetKey(KeyCode.Q)) { throwPower += 0.1f; }
-        if (Input.GetKey(KeyCode.E)) { throwPower -= 0.1f; }
+        if (Input.mouseScrollDelta.y >= 0) { throwPower += 1.0f; }
+        if (Input.mouseScrollDelta.y <= 0) { throwPower -= 1.0f; }
 
         //Capped throw power
         if (throwPower >= 25) { throwPower = 25; }
@@ -40,7 +40,7 @@ public class MainCameraMove : MonoBehaviour
         powerText.text = "Throw Power: " + Mathf.Round(throwPower);
 
         //Freefly Cam
-        if (Input.GetKey(KeyCode.LeftShift))
+        /*if (Input.GetKey(KeyCode.LeftShift))
         {
             moveMulti = 1.5f;
         }
@@ -49,7 +49,7 @@ public class MainCameraMove : MonoBehaviour
         if (Input.GetKey(KeyCode.W)) { transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * moveSpeed * moveMulti; }
         if (Input.GetKey(KeyCode.S)) { transform.position += transform.TransformDirection(Vector3.back) * Time.deltaTime * moveSpeed * moveMulti; }
         if (Input.GetKey(KeyCode.A)) { transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * moveSpeed * moveMulti; }
-        if (Input.GetKey(KeyCode.D)) { transform.position += transform.TransformDirection(Vector3.right) * Time.deltaTime * moveSpeed * moveMulti; }
+        if (Input.GetKey(KeyCode.D)) { transform.position += transform.TransformDirection(Vector3.right) * Time.deltaTime * moveSpeed * moveMulti; }*/
     }
 
     void UserInteract()
@@ -84,7 +84,16 @@ public class MainCameraMove : MonoBehaviour
                 }
                 break;
             case Interactable.InteractionType.Hold:
-                Debug.Log("Yeah");
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Debug.Log("Yeah");
+                }
+                break;
+            case Interactable.InteractionType.Switch:
+                if (Input.GetMouseButtonDown(1))
+                {
+                    interactable.Interact();
+                }
                 break;
             default:
                 throw new System.Exception("Unsupported type of interactable.");

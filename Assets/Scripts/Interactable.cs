@@ -4,13 +4,21 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    //Selected and On for various referencing
     public bool isSelected, isOn;
+
+    //Main and Sub camera 
     public Camera mainCam, subCam;
 
+    //Door and Light gameobjects both optional for the Switch Interaction type
+    public GameObject m_door, m_light;
+
+    //Different types of interaction
     public enum InteractionType
     { 
         Press,
-        Hold
+        Hold,
+        Switch
     }
 
     public InteractionType interactionType;
