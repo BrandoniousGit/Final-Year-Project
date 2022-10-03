@@ -2289,7 +2289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2000
-  maxSpeed: 5
+  maxSpeed: 100
 --- !u!1 &2146990312
 GameObject:
   m_ObjectHideFlags: 0
