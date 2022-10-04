@@ -6,8 +6,8 @@ public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
     private Rigidbody rb;
-    public float moveSpeed, maxSpeed;
-    private float moveMulti;
+    public float moveSpeed, maxSpeed, jumpForce;
+    private bool jumping;
 
     private void Start()
     {
@@ -21,28 +21,43 @@ public class PlayerMove : MonoBehaviour
         float yMove = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(xMove, 0, yMove).normalized;
 
-        /*if (Input.GetKey(KeyCode.LeftShift))
-        {
-            moveMulti = 1.5f;
-        }
-        else { moveMulti = 1.0f; }*/
-
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             Vector3 moveDir = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
             rb.AddForce(moveDir * moveSpeed);
+
             if (rb.velocity.magnitude > maxSpeed)
             {
                 rb.velocity = new Vector3(maxSpeed * moveDir.x, rb.velocity.y, maxSpeed * moveDir.z);
             }
+
+            Debug.DrawRay(cam.transform.position, Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y, 0) * Vector3.forward, Color.yellow, Time.deltaTime);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(0, jumpForce, 0);
+            jumping = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            jumping = false;
+        }
+
+        if (jumping != true)
+        {
+            rb.velocity = new Vector3(rb.velocity.x / 1.45f, rb.velocity.y, rb.velocity.z / 1.45f);
         }
     }
 
     void FixedUpdate()
     {
         UserInput();
-        rb.velocity = new Vector3(rb.velocity.x / 1.45f, rb.velocity.y, rb.velocity.z / 1.45f);
     }
 }
