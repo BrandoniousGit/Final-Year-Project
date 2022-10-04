@@ -7,10 +7,12 @@ public class DoorSwitch : Interactable
     public Vector3 doorOffset;
     private Vector3 velocity = Vector3.zero;
     public float maxH, minH;
+    private Animator anim;
 
     private void Start()
     {
         isOn = true;
+        anim = GetComponent<Animator>();
     }
 
     public override string GetDescription()
@@ -22,6 +24,7 @@ public class DoorSwitch : Interactable
     public override void Interact()
     {
         isOn = !isOn;
+        anim.Play("SwitchFlip");
     }
 
     private void Update()

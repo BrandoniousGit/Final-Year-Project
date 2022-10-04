@@ -32,17 +32,17 @@ public class PlayerMove : MonoBehaviour
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             Vector3 moveDir = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
-            rb.AddForce(moveDir * moveSpeed * Time.deltaTime);
+            rb.AddForce(moveDir * moveSpeed);
             if (rb.velocity.magnitude > maxSpeed)
             {
                 rb.velocity = new Vector3(maxSpeed * moveDir.x, rb.velocity.y, maxSpeed * moveDir.z);
             }
         }
-        rb.velocity = new Vector3(rb.velocity.x / 1.05f, rb.velocity.y, rb.velocity.z / 1.05f);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         UserInput();
+        rb.velocity = new Vector3(rb.velocity.x / 1.45f, rb.velocity.y, rb.velocity.z / 1.45f);
     }
 }

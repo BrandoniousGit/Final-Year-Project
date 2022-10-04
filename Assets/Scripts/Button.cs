@@ -42,7 +42,8 @@ public class Button : Interactable
     {
         if (isSelected == true)
         {
-            rb.transform.position = Vector3.SmoothDamp(rb.transform.position, mainCam.transform.position + mainCam.transform.TransformDirection(Vector3.forward) * mainCamScript.interactDistance, ref velocity, 0.03f);
+            rb.transform.position = mainCam.transform.position + mainCam.transform.TransformDirection(Vector3.forward) * mainCamScript.interactDistance;
+            //rb.transform.position = Vector3.SmoothDamp(rb.transform.position, mainCam.transform.position + mainCam.transform.TransformDirection(Vector3.forward) * mainCamScript.interactDistance, ref velocity, 0.01f);
             rb.transform.rotation = new Quaternion(0, mainCam.transform.rotation.y, 0, 0);
             rb.velocity = Vector3.zero;
             if (Input.GetMouseButtonUp(1))

@@ -39,17 +39,8 @@ public class MainCameraMove : MonoBehaviour
         //Setting GUI Text
         powerText.text = "Throw Power: " + Mathf.Round(throwPower);
 
-        //Freefly Cam
-        /*if (Input.GetKey(KeyCode.LeftShift))
-        {
-            moveMulti = 1.5f;
-        }
-        else { moveMulti = 1.0f; }
-
-        if (Input.GetKey(KeyCode.W)) { transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * moveSpeed * moveMulti; }
-        if (Input.GetKey(KeyCode.S)) { transform.position += transform.TransformDirection(Vector3.back) * Time.deltaTime * moveSpeed * moveMulti; }
-        if (Input.GetKey(KeyCode.A)) { transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * moveSpeed * moveMulti; }
-        if (Input.GetKey(KeyCode.D)) { transform.position += transform.TransformDirection(Vector3.right) * Time.deltaTime * moveSpeed * moveMulti; }*/
+        if (Input.GetKey(KeyCode.A)) { transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z + 0.7f); }
+        if (Input.GetKey(KeyCode.D)) { transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z - 0.7f); }
     }
 
     void UserInteract()
