@@ -32,20 +32,20 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.velocity = new Vector3(maxSpeed * moveDir.x, rb.velocity.y, maxSpeed * moveDir.z);
             }
-
-            Debug.DrawRay(cam.transform.position, Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y, 0) * Vector3.forward, Color.yellow, Time.deltaTime);
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (jumping == false && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(0, jumpForce, 0);
             jumping = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        RaycastHit hit;
+
+        if (jumping == true && Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, (transform.localScale.y / 2) + 0.05f))
         {
             jumping = false;
         }
