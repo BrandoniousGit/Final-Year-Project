@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     private Camera cam;
     private Rigidbody rb;
     public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
-    private bool jumping;
+    public bool jumping, crouching, grounded;
 
     private void Start()
     {
@@ -40,10 +40,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Jumping()
     {
         RaycastHit hit;
-
         if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
         {
             rb.AddForce(0, jumpForce, 0);
@@ -51,11 +50,34 @@ public class PlayerMove : MonoBehaviour
             slowdownMulti = 1.04f;
         }
 
-        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, (transform.localScale.y / 2) + 0.05f) && jumping == true)
+        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, (transform.localScale.y / 2) + 0.05f))
         {
             jumping = false;
             slowdownMulti = 1.18f;
         }
+        Debug.DrawLine(transform.position, transform.position - new Vector3(0, transform.lossyScale.y / 2 + 0.05f, 0), Color.red);
+    }
+
+    void Crouching()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && crouching == false)
+        {
+            crouching = true;
+            transform.localScale = new Vector3(transform.localScale.x, 0.8f, transform.localScale.z);
+            transform.localPosition -= new Vector3(0, 0.4f, 0);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift) && crouching == true)
+        {
+            crouching = false;
+            transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
+            transform.localPosition += new Vector3(0, 0.4f, 0);
+        }
+    }
+
+    void Update()
+    {
+        Crouching();
+        Jumping();
     }
 
     void LateUpdate()
