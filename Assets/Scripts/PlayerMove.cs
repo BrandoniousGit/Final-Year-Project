@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
-    private Rigidbody rb;
+    private Rigidbody rb, groundCheck;
     public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
     public bool jumping, crouching, grounded;
 
@@ -40,36 +40,59 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            jumping = false;
+        }
+}
+
     void Jumping()
     {
+        float rayDist = 1.2f;
         RaycastHit hit;
+
         if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
         {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(0, jumpForce, 0);
             jumping = true;
             slowdownMulti = 1.04f;
         }
 
-        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, (transform.localScale.y / 2) + 0.05f))
+        if (crouching == false)
+        {
+            rayDist = (transform.localScale.y / 2);
+        }
+
+        if (crouching == true)
+        {
+            rayDist = (transform.localScale.y / 2);
+        }
+
+        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, rayDist))
         {
             jumping = false;
             slowdownMulti = 1.18f;
         }
-        Debug.DrawLine(transform.position, transform.position - new Vector3(0, transform.lossyScale.y / 2 + 0.05f, 0), Color.red);
+
+        //Debug.Log(rayDist);
+        Debug.DrawRay(transform.position, -new Vector3(0, rayDist, 0), Color.red, Time.deltaTime);
     }
 
     void Crouching()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && crouching == false)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             crouching = true;
-            transform.localScale = new Vector3(transform.localScale.x, 0.8f, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, 1.6f, transform.localScale.z);
             transform.localPosition -= new Vector3(0, 0.4f, 0);
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) && crouching == true)
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             crouching = false;
-            transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, 2.4f, transform.localScale.z);
             transform.localPosition += new Vector3(0, 0.4f, 0);
         }
     }
