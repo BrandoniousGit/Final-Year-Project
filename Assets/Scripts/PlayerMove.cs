@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     private Camera cam;
     private Rigidbody rb, groundCheck;
     public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
-    public bool jumping, crouching, grounded;
+    public bool jumping, grounded;
 
     private void Start()
     {
@@ -40,17 +40,8 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.layer == 7)
-        {
-            jumping = false;
-        }
-}
-
     void Jumping()
     {
-        float rayDist = 1.2f;
         RaycastHit hit;
 
         if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
@@ -61,27 +52,16 @@ public class PlayerMove : MonoBehaviour
             slowdownMulti = 1.04f;
         }
 
-        if (crouching == false)
-        {
-            rayDist = (transform.localScale.y / 2);
-        }
-
-        if (crouching == true)
-        {
-            rayDist = (transform.localScale.y / 2);
-        }
-
-        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, rayDist))
+        if (Physics.SphereCast(transform.position, transform.localScale.x / 2, Vector3.down, out hit, (transform.localScale.y / 2) + 0.04f))
         {
             jumping = false;
             slowdownMulti = 1.18f;
         }
 
-        //Debug.Log(rayDist);
-        Debug.DrawRay(transform.position, -new Vector3(0, rayDist, 0), Color.red, Time.deltaTime);
+        //Debug.DrawLine(transform.position, transform.position - new Vector3(0, (transform.localScale.y / 2) - 0.01f, 0));
     }
 
-    void Crouching()
+    /*void Crouching()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -95,11 +75,10 @@ public class PlayerMove : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, 2.4f, transform.localScale.z);
             transform.localPosition += new Vector3(0, 0.4f, 0);
         }
-    }
+    }*/
 
     void Update()
     {
-        Crouching();
         Jumping();
     }
 
