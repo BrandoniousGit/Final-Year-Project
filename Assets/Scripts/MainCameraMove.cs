@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 using TMPro;
 
 public class MainCameraMove : MonoBehaviour
@@ -39,14 +38,21 @@ public class MainCameraMove : MonoBehaviour
         //Setting GUI Text
         powerText.text = "Throw Power: " + Mathf.Round(throwPower);
 
-        if (Input.GetKey(KeyCode.A)) { transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z + 0.7f); }
-        if (Input.GetKey(KeyCode.D)) { transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z - 0.7f); }
+        if (Input.GetKey(KeyCode.A)) 
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z + 0.7f);
+        }
+        if (Input.GetKey(KeyCode.D)) 
+        { 
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z - 0.7f);
+        }
     }
 
     void UserInteract()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+
         //Tests for interactable object infront of camera
         if (Physics.Raycast(ray, out hit, interactDistance))
         {
