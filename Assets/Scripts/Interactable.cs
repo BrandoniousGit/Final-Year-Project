@@ -13,6 +13,8 @@ public abstract class Interactable : MonoBehaviour
     //Door and Light gameobjects both optional for the Switch Interaction type
     public GameObject m_door, m_light, m_genericObject;
 
+    public string interactKey;
+
     //Different types of interaction
     public enum InteractionType
     { 

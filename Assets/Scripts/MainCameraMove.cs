@@ -72,22 +72,23 @@ public class MainCameraMove : MonoBehaviour
 
     void HandleInteraction(Interactable interactable)
     {
+        KeyCode interactKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), interactable.interactKey);
         switch (interactable.interactionType)
         {
             case Interactable.InteractionType.Press:
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetKeyDown(interactKeyCode))
                 {
                     interactable.Interact();
                 }
                 break;
             case Interactable.InteractionType.Hold:
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetKeyDown(interactKeyCode))
                 {
                     Debug.Log("Yeah");
                 }
                 break;
             case Interactable.InteractionType.Switch:
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetKeyDown(interactKeyCode))
                 {
                     interactable.Interact();
                 }
