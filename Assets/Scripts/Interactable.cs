@@ -11,7 +11,7 @@ public abstract class Interactable : MonoBehaviour
     public Camera mainCam, subCam;
 
     //Door and Light gameobjects both optional for the Switch Interaction type
-    public GameObject m_door, m_light;
+    public GameObject m_door, m_light, m_genericObject;
 
     //Different types of interaction
     public enum InteractionType

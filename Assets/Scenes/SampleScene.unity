@@ -2271,8 +2271,8 @@ MonoBehaviour:
   maxSpeed: 8
   jumpForce: 400
   slowdownMulti: 1.18
-  jumping: 0
   grounded: 0
+  crouching: 0
 --- !u!23 &2011035337
 MeshRenderer:
   m_ObjectHideFlags: 0
