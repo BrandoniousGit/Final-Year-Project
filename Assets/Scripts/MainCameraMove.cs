@@ -6,15 +6,36 @@ using TMPro;
 
 public class MainCameraMove : MonoBehaviour
 {
-    public TextMeshProUGUI interactionText, powerText;
+    public TextMeshProUGUI interactionText, magazineSize;
     public Interactable iOScript;
     public float xSens, ySens, throwPower, interactDistance;
     private float x, y;
+
+    public Transform primWeaponPos, secWeaponPos;
+    private GunObject primWeapon, secWeapon;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (primWeaponPos.GetComponentInChildren<GunScript>() != null)
+        {
+            primWeapon = primWeaponPos.GetComponentInChildren<GunObject>();
+        }
+        else
+        {
+            Debug.LogWarning("The Primary weapon is null!");
+        }
+
+        if (secWeaponPos.GetComponentInChildren<GunScript>() != null)
+        {
+            secWeapon = secWeaponPos.GetComponentInChildren<GunObject>();
+        }
+        else
+        {
+            Debug.LogWarning("The Secondary weapon is null!");
+        }
     }
 
     void UserInput()
@@ -36,7 +57,7 @@ public class MainCameraMove : MonoBehaviour
         if (throwPower <= 0) { throwPower = 0; }
 
         //Setting GUI Text
-        powerText.text = "Throw Power: " + Mathf.Round(throwPower);
+        magazineSize.text = ("{0}: {1} | {2}", primWeapon.gunName, primWeapon.ammoInClip.ToString(), primWeapon.ammoInReserve.ToString());
 
         if (Input.GetKey(KeyCode.A)) 
         {
