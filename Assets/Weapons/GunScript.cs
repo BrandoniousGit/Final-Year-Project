@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-    public ScriptableObject gunObject;
+    public GunObject gunObject;
 
     void Awake()
     {
-        
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
 
         }

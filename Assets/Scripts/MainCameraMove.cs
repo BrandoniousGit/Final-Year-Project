@@ -6,36 +6,15 @@ using TMPro;
 
 public class MainCameraMove : MonoBehaviour
 {
-    public TextMeshProUGUI interactionText, magazineSize;
+    public TextMeshProUGUI interactionText;
     public Interactable iOScript;
-    public float xSens, ySens, throwPower, interactDistance;
+    public float xSens, ySens, interactDistance;
     private float x, y;
-
-    public Transform primWeaponPos, secWeaponPos;
-    private GunObject primWeapon, secWeapon;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        if (primWeaponPos.GetComponentInChildren<GunScript>() != null)
-        {
-            primWeapon = primWeaponPos.GetComponentInChildren<GunObject>();
-        }
-        else
-        {
-            Debug.LogWarning("The Primary weapon is null!");
-        }
-
-        if (secWeaponPos.GetComponentInChildren<GunScript>() != null)
-        {
-            secWeapon = secWeaponPos.GetComponentInChildren<GunObject>();
-        }
-        else
-        {
-            Debug.LogWarning("The Secondary weapon is null!");
-        }
     }
 
     void UserInput()
@@ -47,17 +26,6 @@ public class MainCameraMove : MonoBehaviour
         y = Mathf.Clamp(y, -80.0f, 80.0f);
 
         transform.eulerAngles = new Vector3(y, x, 0);
-
-        //Adjusting Throw Power
-        if (Input.mouseScrollDelta.y >= 0) { throwPower += 1.0f; }
-        if (Input.mouseScrollDelta.y <= 0) { throwPower -= 1.0f; }
-
-        //Capped throw power
-        if (throwPower >= 25) { throwPower = 25; }
-        if (throwPower <= 0) { throwPower = 0; }
-
-        //Setting GUI Text
-        magazineSize.text = ("{0}: {1} | {2}", primWeapon.gunName, primWeapon.ammoInClip.ToString(), primWeapon.ammoInReserve.ToString());
 
         if (Input.GetKey(KeyCode.A)) 
         {

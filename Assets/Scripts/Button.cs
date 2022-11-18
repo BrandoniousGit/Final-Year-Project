@@ -52,7 +52,7 @@ public class Button : Interactable
             }
             else if (Input.GetMouseButtonDown(0))
             {
-                rb.velocity = mainCam.transform.TransformDirection(Vector3.forward) * mainCamScript.throwPower;
+                rb.velocity = mainCam.transform.TransformDirection(Vector3.forward) * 15.0f;
                 isSelected = false;
             }
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3452924601007283477}
   - component: {fileID: -8092590658621110230}
   m_Layer: 0
-  m_Name: PistolTemp
+  m_Name: RifleTemp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bb27004a733e9b34f9d5651f042d3647, type: 2}
+  - {fileID: 2100000, guid: 6d78acb732582224b97a54239af71a78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a9c5b0c8486e74996e71294f2b7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunObject: {fileID: 11400000, guid: d7c473564f660b14ebc2a84195051eaf, type: 2}
+  gunObject: {fileID: 11400000, guid: aaa9172f254e491448c3622699600fc3, type: 2}
+  WeaponList: []

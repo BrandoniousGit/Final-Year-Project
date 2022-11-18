@@ -13,11 +13,11 @@ public class GunObject : ScriptableObject
         Shotgun
     }
 
-    public GunType gunType;
+    public GunType m_gunType;
 
-    public bool canShoot, reloading;
+    public bool m_canShoot, m_reloading;
 
-    public string gunName, gunDescription;
-    public int invSlot, ammoInClip, ammoInReserve, clipSize, reserveSize;
-    public float damage;
+    public string m_gunName, m_gunDescription;
+    public int m_invSlot, m_ammoInClip, m_ammoInReserve, m_clipSize, m_reserveSize;
+    public float m_damage;
 }
