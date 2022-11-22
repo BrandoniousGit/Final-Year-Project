@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7897283380349045805}
   - component: {fileID: 5296538544768248494}
   - component: {fileID: 3452924601007283477}
-  - component: {fileID: -8092590658621110230}
   m_Layer: 0
   m_Name: PistolTemp
   m_TagString: Untagged
@@ -84,16 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8092590658621110230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5828008131436175625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a9c5b0c8486e74996e71294f2b7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunObject: {fileID: 11400000, guid: d7c473564f660b14ebc2a84195051eaf, type: 2}

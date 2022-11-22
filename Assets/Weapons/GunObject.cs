@@ -5,12 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Create Gun")]
 public class GunObject : ScriptableObject
 {
+    public GameObject m_model;
+
     public enum GunType
     {
         Burst,
         FullAuto,
         SemiAuto,
-        Shotgun
+        Shotgun,
+        NonHitscan
     }
 
     public GunType m_gunType;

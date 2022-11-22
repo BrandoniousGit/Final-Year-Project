@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
     private Rigidbody rb, groundCheck;
+    public GameObject gunHolder, gunHolderPos;
+    public TextMeshProUGUI gunInfo;
     public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
     public bool grounded, crouching;
 
@@ -89,11 +93,19 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    void GunHUDInfo()
+    {
+        gunHolder.transform.position = gunHolderPos.transform.position;
+        gunHolder.transform.rotation = gunHolderPos.transform.rotation;
+
+    }
+
     void Update()
     {
         Jumping();
         Crouching();
         CheckGrounded();
+        GunHUDInfo();
     }
 
     void LateUpdate()

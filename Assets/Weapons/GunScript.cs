@@ -6,16 +6,21 @@ public class GunScript : MonoBehaviour
 {
     public GunObject gunObject;
 
-    void Awake()
-    {
+    public int clipSize, reserveSize, upgrade;
+    public float damage;
 
+    private void GunInitialise(GunObject currentWeapon)
+    {
+        clipSize = currentWeapon.m_clipSize;
+        reserveSize = currentWeapon.m_reserveSize;
+        damage = currentWeapon.m_damage;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            
         }
     }
 }

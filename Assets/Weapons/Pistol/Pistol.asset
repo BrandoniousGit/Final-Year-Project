@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3079152dd21b34640b66ef95239ea14e, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
+  m_model: {fileID: 5828008131436175625, guid: 9836beb340e3b1749a609f50552f72c8, type: 3}
   m_gunType: 2
   m_canShoot: 0
   m_reloading: 0

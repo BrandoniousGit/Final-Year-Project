@@ -13,20 +13,19 @@ public class WeaponSelect : MonoBehaviour
     {
         foreach(GunObject weapon in WeaponList)
         {
-            switch(weapon.m_invSlot)
+            if (weapon.m_invSlot == 0)
             {
-                case 0:
-                    Instantiate(weaponSelectClone, primWeapons.transform);
-                    weaponSelectClone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
-                    Debug.Log(weapon.m_gunName);
-                    break;
-                case 1:
-                    Instantiate(weaponSelectClone, secWeapons.transform);
-                    weaponSelectClone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
-                    Debug.Log(weapon.m_gunName);
-                    break;
-                default:
-                    throw new System.Exception("Unsupported inv slot.");
+                GameObject clone;
+                clone = Instantiate(weaponSelectClone, primWeapons.transform);
+                clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
+                Debug.Log(weapon.m_gunName);
+            }
+            if (weapon.m_invSlot == 1)
+            {
+                GameObject clone;
+                clone = Instantiate(weaponSelectClone, secWeapons.transform);
+                clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
+                Debug.Log(weapon.m_gunName);
             }
         }
     }
