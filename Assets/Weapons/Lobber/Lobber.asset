@@ -19,8 +19,8 @@ MonoBehaviour:
   m_gunName: Lobber
   m_gunDescription: Lobber Description
   m_invSlot: 0
-  m_ammoInClip: 0
-  m_ammoInReserve: 0
+  m_ammoInClip: 6
+  m_ammoInReserve: 24
   m_clipSize: 6
   m_reserveSize: 24
   m_damage: 20

@@ -7,7 +7,7 @@ using TMPro;
 public class WeaponSelect : MonoBehaviour
 {
     public GunObject[] WeaponList;
-    public GameObject weaponSelectClone, primWeapons, secWeapons;
+    public GameObject weaponSelectClone, primWeapons, secWeapons, weaponsManager;
 
     private void Start()
     {
@@ -18,15 +18,28 @@ public class WeaponSelect : MonoBehaviour
                 GameObject clone;
                 clone = Instantiate(weaponSelectClone, primWeapons.transform);
                 clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
-                Debug.Log(weapon.m_gunName);
+                clone.GetComponent<Button>().onClick.AddListener(delegate { AddToWeaponManager(weapon, weapon.m_invSlot); });
             }
             if (weapon.m_invSlot == 1)
             {
                 GameObject clone;
                 clone = Instantiate(weaponSelectClone, secWeapons.transform);
                 clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
-                Debug.Log(weapon.m_gunName);
+                clone.GetComponent<Button>().onClick.AddListener(delegate { AddToWeaponManager(weapon, weapon.m_invSlot); });
             }
+        }
+    }
+
+    void AddToWeaponManager(GunObject weapon, int weaponSlot)
+    {
+        switch(weaponSlot)
+        {
+            case 0:
+                weaponsManager.GetComponent<WeaponsManager>().primaryWeapon = weapon;
+                break;
+            case 1:
+                weaponsManager.GetComponent<WeaponsManager>().secondaryWeapon = weapon;
+                break;
         }
     }
 }

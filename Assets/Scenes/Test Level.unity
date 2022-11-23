@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 285151986}
   - component: {fileID: 285151985}
   m_Layer: 5
-  m_Name: Magazine
+  m_Name: GunInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1407,6 +1407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunObject: {fileID: 11400000, guid: 5ed5854f621320a48a5f3f955d472aee, type: 2}
+  weaponManager: {fileID: 0}
+  weaponManagerScript: {fileID: 0}
+  gunInfo: {fileID: 285151985}
   clipSize: 0
   reserveSize: 0
   upgrade: 0
@@ -2361,9 +2364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdac027e13dff44dbbd83323cfc6340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunHolder: {fileID: 0}
-  gunHolderPos: {fileID: 0}
-  gunInfo: {fileID: 0}
+  gunHolder: {fileID: 950478263}
+  gunHolderPos: {fileID: 818096073}
   moveSpeed: 2000
   maxSpeed: 8
   jumpForce: 400

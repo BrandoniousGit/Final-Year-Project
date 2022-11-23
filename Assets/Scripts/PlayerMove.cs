@@ -9,7 +9,6 @@ public class PlayerMove : MonoBehaviour
     private Camera cam;
     private Rigidbody rb, groundCheck;
     public GameObject gunHolder, gunHolderPos;
-    public TextMeshProUGUI gunInfo;
     public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
     public bool grounded, crouching;
 
@@ -97,6 +96,7 @@ public class PlayerMove : MonoBehaviour
     {
         gunHolder.transform.position = gunHolderPos.transform.position;
         gunHolder.transform.rotation = gunHolderPos.transform.rotation;
+
 
     }
 

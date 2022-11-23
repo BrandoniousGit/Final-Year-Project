@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : Interactable
+public class BoxScript : Interactable
 {
     Rigidbody rb;
     private Vector3 velocity = Vector3.zero;
