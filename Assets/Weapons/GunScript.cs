@@ -7,7 +7,7 @@ using TMPro;
 public class GunScript : MonoBehaviour
 {
     public GunObject gunObject;
-    public GameObject weaponManager;
+    public GameObject weaponManager, backupWeaponManager;
     public WeaponsManager weaponManagerScript;
 
     public TextMeshProUGUI gunInfo;
@@ -35,7 +35,16 @@ public class GunScript : MonoBehaviour
             SecondaryWeaponClone = Instantiate(weaponManagerScript.secondaryWeapon.m_model, transform);
             SecondaryWeaponClone.SetActive(false);
         }
-        else { Debug.LogError("No Weapon Manager found!!");  }
+        else 
+        {
+            backupWeaponManager.SetActive(true);
+            weaponManager = GameObject.FindGameObjectWithTag("WeaponManager");
+            weaponManagerScript = weaponManager.GetComponent<WeaponsManager>();
+
+            PrimaryWeaponClone = Instantiate(weaponManagerScript.primaryWeapon.m_model, transform);
+            SecondaryWeaponClone = Instantiate(weaponManagerScript.secondaryWeapon.m_model, transform);
+            SecondaryWeaponClone.SetActive(false);
+        }
     }
 
     private void Update()
