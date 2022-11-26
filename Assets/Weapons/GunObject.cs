@@ -18,9 +18,9 @@ public class GunObject : ScriptableObject
 
     public GunType m_gunType;
 
-    public bool m_canShoot, m_reloading;
+    public bool m_canShoot;
 
     public string m_gunName, m_gunDescription;
     public int m_invSlot, m_ammoInClip, m_ammoInReserve, m_clipSize, m_reserveSize;
-    public float m_damage;
+    public float m_damage, m_reloadTime, m_timeBetweenShot, m_timeBetweenBurst;
 }

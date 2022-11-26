@@ -14,8 +14,9 @@ public class GunScript : MonoBehaviour
 
     private GameObject PrimaryWeaponClone, SecondaryWeaponClone;
 
-    public int clipSize, reserveSize, upgrade;
+    public int clipSize, reserveSize;
     public float damage;
+    public bool reloading;
 
     private void GunInitialise(GunObject currentWeapon)
     {
@@ -34,6 +35,7 @@ public class GunScript : MonoBehaviour
             PrimaryWeaponClone = Instantiate(weaponManagerScript.primaryWeapon.m_model, transform);
             SecondaryWeaponClone = Instantiate(weaponManagerScript.secondaryWeapon.m_model, transform);
             SecondaryWeaponClone.SetActive(false);
+            GunInitialise(gunObject);
         }
         else 
         {
@@ -49,7 +51,19 @@ public class GunScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && reloading == false && gunObject.m_ammoInClip > 0)
+        {
+            WeaponShoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && reloading == false)
+        {
+            WeaponReload();
+        }
+
+
+        //Activating primary weapon and deactivating secondary
+        if (Input.GetKeyDown(KeyCode.Alpha1) && reloading == false)
         {
             if (PrimaryWeaponClone.activeSelf == false)
             {
@@ -59,7 +73,9 @@ public class GunScript : MonoBehaviour
                 GunInitialise(gunObject);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        //Activating secondary weapon and deactivating primary
+        if (Input.GetKeyDown(KeyCode.Alpha2) && reloading == false)
         {
             if (SecondaryWeaponClone.activeSelf == false)
             {
@@ -70,5 +86,38 @@ public class GunScript : MonoBehaviour
             }
         }
         gunInfo.text = string.Format("{0}: {1} | {2}", gunObject.m_gunName, gunObject.m_ammoInClip, gunObject.m_ammoInReserve);
+    }
+
+    //Shoot function
+    void WeaponShoot()
+    {
+        gunObject.m_ammoInClip -= 1;
+        // Shooting goes here //
+    }
+
+    //Reload function
+    void WeaponReload()
+    {
+        reloading = true;
+        Debug.Log("Reloading!");
+        StartCoroutine("Reloading", gunObject.m_reloadTime);
+    }
+
+    IEnumerator Reloading(float reloadTime)
+    {
+        yield return new WaitForSeconds(reloadTime);
+        if (gunObject.m_ammoInReserve + gunObject.m_ammoInClip < clipSize)
+        {
+            gunObject.m_ammoInClip += gunObject.m_ammoInReserve;
+            gunObject.m_ammoInReserve = 0;
+        }
+        else
+        {
+            int diff = clipSize - gunObject.m_ammoInClip;
+            gunObject.m_ammoInClip = clipSize;
+            gunObject.m_ammoInReserve -= diff;
+        }
+        reloading = false;
+        Debug.Log("Reloaded");
     }
 }
