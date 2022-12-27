@@ -6,6 +6,10 @@ using UnityEngine;
 public class GunObject : ScriptableObject
 {
     public GameObject m_model;
+    public GameObject m_projectile;
+    public Transform m_bulletImpactPosition;
+    public TrailRenderer m_bulletTrail;
+    public ParticleSystem m_ImpactParticleSystem;
 
     public enum GunType
     {
@@ -18,9 +22,7 @@ public class GunObject : ScriptableObject
 
     public GunType m_gunType;
 
-    public bool m_canShoot;
-
     public string m_gunName, m_gunDescription;
-    public int m_invSlot, m_ammoInClip, m_ammoInReserve, m_clipSize, m_reserveSize;
-    public float m_damage, m_reloadTime, m_timeBetweenShot, m_timeBetweenBurst;
+    public int m_invSlot, m_ammoInClip, m_ammoInReserve, m_clipSize, m_reserveSize, m_burstCount, m_shotgunPelletCount;
+    public float m_damage, m_reloadTime, m_timeBetweenShot, m_timeBetweenBurst, m_shotgunSpread;
 }

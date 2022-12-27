@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   m_model: {fileID: 5828008131436175625, guid: 9836beb340e3b1749a609f50552f72c8, type: 3}
+  projectile: {fileID: 0}
   m_gunType: 2
-  m_canShoot: 0
   m_gunName: Pistol
   m_gunDescription: Pistol Desc
   m_invSlot: 0
-  m_ammoInClip: 15
-  m_ammoInReserve: 325
+  m_ammoInClip: 6
+  m_ammoInReserve: 239
   m_clipSize: 15
   m_reserveSize: 325
+  m_burstCount: 0
   m_damage: 5
   m_reloadTime: 0.8
-  m_timeBetweenShot: 0
+  m_timeBetweenShot: 0.08
   m_timeBetweenBurst: 0

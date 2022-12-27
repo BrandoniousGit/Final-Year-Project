@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   m_model: {fileID: 5828008131436175625, guid: 39c09507136fd9c4f8135f2286a8e9d5, type: 3}
+  m_projectile: {fileID: 0}
   m_gunType: 3
-  m_canShoot: 0
   m_gunName: Shotgun
   m_gunDescription: Shotgun Desc
   m_invSlot: 1
   m_ammoInClip: 6
-  m_ammoInReserve: 24
+  m_ammoInReserve: 14
   m_clipSize: 6
   m_reserveSize: 26
+  m_burstCount: 0
+  m_shotgunPelletCount: 6
   m_damage: 1.2
   m_reloadTime: 2
   m_timeBetweenShot: 0
   m_timeBetweenBurst: 0
+  m_shotgunSpread: 0.1

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - WeaponManager
+  - Weapon
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - PlayerIgnore
-  - 
-  - 
+  - Weapon
+  - Projectile
   - 
   - 
   - 
