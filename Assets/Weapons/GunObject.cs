@@ -7,7 +7,6 @@ public class GunObject : ScriptableObject
 {
     public GameObject m_model;
     public GameObject m_projectile;
-    public Transform m_bulletImpactPosition;
     public TrailRenderer m_bulletTrail;
     public ParticleSystem m_ImpactParticleSystem;
 

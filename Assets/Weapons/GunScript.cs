@@ -186,6 +186,9 @@ public class GunScript : MonoBehaviour
 
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), out hit, 100.0f))
                 {
+                    TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, transform.position, Quaternion.identity);
+
+                    StartCoroutine(SpawnTrail(trail, hit));
                     Debug.DrawRay(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), Color.red, 3.0f);
                     Debug.Log(hit.transform.name);
                 }
@@ -196,7 +199,7 @@ public class GunScript : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100.0f))
             {
-                TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, gunObject.m_bulletImpactPosition.position, Quaternion.identity);
+                TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, transform.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit));
                 Debug.DrawRay(cam.transform.position, cam.transform.forward * 5, Color.red, 3.0f);
