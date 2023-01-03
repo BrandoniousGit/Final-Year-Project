@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3079152dd21b34640b66ef95239ea14e, type: 3}
+  m_Name: Rifle_FA
+  m_EditorClassIdentifier: 
+  m_model: {fileID: 5828008131436175625, guid: 5b85f1ceef8f27e4e97cdf267ceb3020, type: 3}
+  m_projectile: {fileID: 0}
+  m_bulletTrail: {fileID: 2883528874004890972, guid: bdcb4c1932ef49941973590caad413b8, type: 3}
+  m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
+  m_gunType: 1
+  m_gunName: Full Auto Rifle
+  m_gunDescription: Standard Fully Automatic Rifle
+  m_invSlot: 1
+  m_ammoInClip: 24
+  m_clipSize: 35
+  m_burstCount: 3
+  m_shotgunPelletCount: 0
+  m_damage: 3.8
+  m_reloadTime: 0.9
+  m_timeBetweenShot: 0.12
+  m_timeBetweenBurst: 0
+  m_shotgunSpread: 0

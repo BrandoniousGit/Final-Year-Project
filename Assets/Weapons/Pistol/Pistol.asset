@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3079152dd21b34640b66ef95239ea14e, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  m_model: {fileID: 5828008131436175625, guid: 9836beb340e3b1749a609f50552f72c8, type: 3}
+  m_model: {fileID: 4642901189867670581, guid: 1f01a7aea7ce1e9419915423dfb24a86, type: 3}
   m_projectile: {fileID: 0}
-  m_bulletTrail: {fileID: 2883528874004890972, guid: da650d37e1ff2f54b9ab67a59552a480, type: 3}
+  m_bulletTrail: {fileID: 2883528874004890972, guid: c302862cd41a81e40be7d66bcf849489, type: 3}
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
   m_gunType: 2
   m_gunName: Pistol
-  m_gunDescription: Pistol Desc
+  m_gunDescription: Trusty Pistol
   m_invSlot: 0
-  m_ammoInClip: 15
-  m_ammoInReserve: 6
-  m_clipSize: 15
-  m_reserveSize: 325
+  m_ammoInClip: 10
+  m_clipSize: 20
   m_burstCount: 0
   m_shotgunPelletCount: 0
-  m_damage: 5
+  m_damage: 8
   m_reloadTime: 0.8
   m_timeBetweenShot: 0.08
   m_timeBetweenBurst: 0

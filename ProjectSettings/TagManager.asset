@@ -7,6 +7,14 @@ TagManager:
   - WeaponManager
   - Weapon
   - Projectile
+  - EnemyHead
+  - Enemy
+  - Flesh
+  - Sand
+  - Metal
+  - Stone
+  - Wood
+  - GunFront
   layers:
   - Default
   - TransparentFX

@@ -15,8 +15,9 @@ public class GunScript : MonoBehaviour
     public TextMeshProUGUI gunInfo;
 
     private GameObject PrimaryWeaponClone, SecondaryWeaponClone;
+    private Vector3 weaponMuzzlePos;
 
-    public int clipSize, reserveSize;
+    public int clipSize;
     public float damage;
     public bool reloading, canShoot;
 
@@ -25,7 +26,6 @@ public class GunScript : MonoBehaviour
     private void GunInitialise(GunObject currentWeapon)
     {
         clipSize = currentWeapon.m_clipSize;
-        reserveSize = currentWeapon.m_reserveSize;
         damage = currentWeapon.m_damage;
     }
 
@@ -43,6 +43,7 @@ public class GunScript : MonoBehaviour
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
+            gunObject.m_ammoInClip = clipSize;
         }
         else 
         {
@@ -54,6 +55,7 @@ public class GunScript : MonoBehaviour
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
+            gunObject.m_ammoInClip = clipSize;
         }
     }
 
@@ -94,7 +96,7 @@ public class GunScript : MonoBehaviour
                 GunInitialise(gunObject);
             }
         }
-        gunInfo.text = string.Format("{0}: {1} | {2}", gunObject.m_gunName, gunObject.m_ammoInClip, gunObject.m_ammoInReserve);
+        gunInfo.text = string.Format("{0}: {1} | {2}", gunObject.m_gunName, gunObject.m_ammoInClip, gunObject.m_clipSize);
     }
 
     //Shoot function
@@ -174,55 +176,101 @@ public class GunScript : MonoBehaviour
 
     void CheckRay(GunType gunType)
     {
-        RaycastHit hit;
+        weaponMuzzlePos = transform.TransformPoint(FindGameObjectInChildWithTag(gunObject.m_model, "GunFront").transform.position);
+        //Checking for if shotgun impacts walls/enemies
         if (gunType == GunType.Shotgun)
         {
             float randomX, randomY, randomZ;
             for (int i = 0; i < gunObject.m_shotgunPelletCount; i++)
             {
+                //Random Spread
                 randomX = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
                 randomY = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
                 randomZ = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
 
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), out hit, 100.0f))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), out RaycastHit hit, Mathf.Infinity))
                 {
-                    TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, transform.position, Quaternion.identity);
+                    CheckForEnemy(hit);
 
-                    StartCoroutine(SpawnTrail(trail, hit));
-                    Debug.DrawRay(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), Color.red, 3.0f);
-                    Debug.Log(hit.transform.name);
+                    TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                }
+                else
+                {
+                    TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, (cam.transform.forward + new Vector3(randomX, randomY, randomZ)) * 100, Vector3.zero, false));
                 }
             }
         }
 
+        //Checking for any other hitscan weapons
         else
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 100.0f))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity))
             {
-                TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, transform.position, Quaternion.identity);
+                CheckForEnemy(hit);
 
-                StartCoroutine(SpawnTrail(trail, hit));
-                Debug.DrawRay(cam.transform.position, cam.transform.forward * 5, Color.red, 3.0f);
-                Debug.Log(hit.transform.name);
+                TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+            }
+            else
+            {
+                TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, cam.transform.forward * 100, Vector3.zero, false));
             }
         }
     }
 
-    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    void CheckForEnemy(RaycastHit _hit)
     {
-        float time = 0;
+        EnemyScript HitEnemyScript;
 
-        while (time < 1)
+        if (_hit.transform.gameObject.tag == "Enemy")
         {
-            trail.transform.position = Vector3.Lerp(trail.transform.position, hit.point, time);
-            time += Time.deltaTime / trail.time;
+            HitEnemyScript = _hit.transform.GetComponent<EnemyScript>();
+            HitEnemyScript.TakeDamage(damage);
+            Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal), _hit.transform);
+        }
+        else
+        {
+            Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
+        }
+    }
+
+    public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
+    {
+        Transform t = parent.transform;
+
+        for (int i = 0; i < t.childCount; i++)
+        {
+            if (t.GetChild(i).gameObject.tag == tag)
+            {
+                return t.GetChild(i).gameObject;
+            }
+
+        }
+
+        return null;
+    }
+
+    // ===========================================================ENUMERATORS===========================================================
+
+    IEnumerator SpawnTrail(TrailRenderer _trail, Vector3 _hit, Vector3 _hitNormal, bool _impact)
+    {
+        float distance = Vector3.Distance(_trail.transform.position, _hit);
+        float startDistance = distance;
+
+        //Sets speed of trail to be the same for any distance
+        while (distance > 0)
+        {
+            _trail.transform.position = Vector3.Lerp(_trail.transform.position, _hit, 1 - (distance / startDistance));
+            distance -= Time.deltaTime * 100;
 
             yield return null;
         }
-        trail.transform.position = hit.point;
-        Instantiate(gunObject.m_ImpactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+        _trail.transform.position = _hit;
 
-        Destroy(trail.gameObject, trail.time);
+        Destroy(_trail.gameObject, _trail.time);
     }
 
     IEnumerator CreateProjectile()
@@ -258,7 +306,8 @@ public class GunScript : MonoBehaviour
     IEnumerator Reloading(float reloadTime)
     {
         yield return new WaitForSeconds(reloadTime);
-        if (gunObject.m_ammoInReserve + gunObject.m_ammoInClip < clipSize)
+        gunObject.m_ammoInClip = clipSize;
+        /*if (gunObject.m_ammoInReserve + gunObject.m_ammoInClip < clipSize)
         {
             gunObject.m_ammoInClip += gunObject.m_ammoInReserve;
             gunObject.m_ammoInReserve = 0;
@@ -268,7 +317,7 @@ public class GunScript : MonoBehaviour
             int diff = clipSize - gunObject.m_ammoInClip;
             gunObject.m_ammoInClip = clipSize;
             gunObject.m_ammoInReserve -= diff;
-        }
+        }*/
         reloading = false;
         Debug.Log("Reloaded");
     }

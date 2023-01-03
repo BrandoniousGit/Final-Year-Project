@@ -7,9 +7,9 @@ using TMPro;
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
-    private Rigidbody rb, groundCheck;
+    private Rigidbody rb;
     public GameObject gunHolder, gunHolderPos;
-    public float moveSpeed, maxSpeed, jumpForce, slowdownMulti;
+    public float moveSpeed, jumpForce, slowdownMulti;
     public bool grounded, crouching;
 
     private void Start()
@@ -21,20 +21,15 @@ public class PlayerMove : MonoBehaviour
     void UserInput()
     {
         float xMove = Input.GetAxisRaw("Horizontal");
-        float yMove = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(xMove, 0, yMove).normalized;
+        float zMove = Input.GetAxisRaw("Vertical");
+        Vector3 direction = new Vector3(xMove, 0, zMove).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             Vector3 moveDir = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
-            rb.AddForce(moveDir * moveSpeed * Time.deltaTime);
-
-            if (rb.velocity.magnitude > maxSpeed)
-            {
-                rb.velocity = new Vector3(maxSpeed * moveDir.x, rb.velocity.y, maxSpeed * moveDir.z);
-            }
+            rb.velocity = new Vector3(moveDir.x * moveSpeed, rb.velocity.y, moveDir.z * moveSpeed);
         }
 
         else
@@ -96,8 +91,6 @@ public class PlayerMove : MonoBehaviour
     {
         gunHolder.transform.position = gunHolderPos.transform.position;
         gunHolder.transform.rotation = gunHolderPos.transform.rotation;
-
-
     }
 
     void Update()

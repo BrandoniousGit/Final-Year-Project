@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5296538544768248494}
   - component: {fileID: 3452924601007283477}
   m_Layer: 0
-  m_Name: RifleTemp
+  m_Name: Rifle_FATemp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

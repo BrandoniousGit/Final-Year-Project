@@ -9,6 +9,7 @@ public class WeaponSelect : MonoBehaviour
     public GunObject[] WeaponList;
     public GameObject weaponSelectClone, primWeapons, secWeapons, weaponsManager;
     public TextMeshProUGUI currentSelPrim, currentSelSec;
+    public TextMeshProUGUI currentSelPrimDesc, currentSelSecDesc;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class WeaponSelect : MonoBehaviour
                 if (!once1)
                 {
                     currentSelPrim.text = string.Format("Current: {0}", weapon.m_gunName);
+                    currentSelPrimDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                     once1 = !once1;
                 }
             }
@@ -37,6 +39,7 @@ public class WeaponSelect : MonoBehaviour
                 if (!once2)
                 {
                     currentSelSec.text = string.Format("Current: {0}", weapon.m_gunName);
+                    currentSelSecDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                     once2 = !once2;
                 }
             }
@@ -50,10 +53,13 @@ public class WeaponSelect : MonoBehaviour
             case 0:
                 weaponsManager.GetComponent<WeaponsManager>().primaryWeapon = weapon;
                 currentSelPrim.text = string.Format("Current: {0}", weapon.m_gunName);
+                currentSelPrimDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
+
                 break;
             case 1:
                 weaponsManager.GetComponent<WeaponsManager>().secondaryWeapon = weapon;
                 currentSelSec.text = string.Format("Current: {0}", weapon.m_gunName);
+                currentSelSecDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                 break;
         }
     }
