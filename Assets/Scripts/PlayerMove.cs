@@ -76,14 +76,18 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             crouching = true;
-            transform.localScale = new Vector3(transform.localScale.x, 0.8f, transform.localScale.z);
-            transform.localPosition -= new Vector3(0, 0.4f, 0);
+            moveSpeed /= 1.5f;
+            gunHolderPos.transform.localPosition -= new Vector3(0, 0.05f, 0);
+            transform.localScale = new Vector3(transform.localScale.x, 1.0f, transform.localScale.z);
+            transform.localPosition -= new Vector3(0, 0.2f, 0);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             crouching = false;
+            moveSpeed *= 1.5f;
+            gunHolderPos.transform.localPosition += new Vector3(0, 0.05f, 0);
             transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
-            transform.localPosition += new Vector3(0, 0.4f, 0);
+            transform.localPosition += new Vector3(0, 0.2f, 0);
         }
     }
 

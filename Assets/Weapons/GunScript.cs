@@ -11,13 +11,14 @@ public class GunScript : MonoBehaviour
     public GunObject gunObject;
     public GameObject weaponManager, backupWeaponManager;
     public WeaponsManager weaponManagerScript;
+    public ParticleSystem muzzleFlash;
 
     public TextMeshProUGUI gunInfo;
 
     private GameObject PrimaryWeaponClone, SecondaryWeaponClone;
     private Vector3 weaponMuzzlePos;
 
-    public int clipSize;
+    public int clipSize, ammoInClip;
     public float damage;
     public bool reloading, canShoot;
 
@@ -197,6 +198,7 @@ public class GunScript : MonoBehaviour
                 }
                 else
                 {
+
                     TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, (cam.transform.forward + new Vector3(randomX, randomY, randomZ)) * 100, Vector3.zero, false));
                 }
@@ -210,6 +212,8 @@ public class GunScript : MonoBehaviour
             {
                 CheckForEnemy(hit);
 
+                Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+                 
                 TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
             }
@@ -264,7 +268,7 @@ public class GunScript : MonoBehaviour
         while (distance > 0)
         {
             _trail.transform.position = Vector3.Lerp(_trail.transform.position, _hit, 1 - (distance / startDistance));
-            distance -= Time.deltaTime * 100;
+            distance -= Time.deltaTime * 200;
 
             yield return null;
         }
