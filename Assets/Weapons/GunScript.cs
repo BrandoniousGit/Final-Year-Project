@@ -22,7 +22,7 @@ public class GunScript : MonoBehaviour
     public float damage;
     public bool reloading, canShoot;
 
-    Camera cam;
+    private Camera cam;
 
     private void GunInitialise(GunObject currentWeapon)
     {
@@ -69,7 +69,7 @@ public class GunScript : MonoBehaviour
         }
 
         //Reloading
-        if (Input.GetKeyDown(KeyCode.R) && !reloading && canShoot)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && canShoot && gunObject.m_ammoInClip != clipSize)
         {
             WeaponReload();
         }
@@ -189,55 +189,62 @@ public class GunScript : MonoBehaviour
                 randomY = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
                 randomZ = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
 
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + new Vector3(randomX, randomY, randomZ), out RaycastHit hit, Mathf.Infinity))
+                Vector3 RandomVec = new Vector3(randomX, randomY, randomZ);
+
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity))
                 {
-                    CheckForEnemy(hit);
+                    WhatDidIHit(hit);
+
+                    Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
 
                     TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                    StartCoroutine(SpawnTrail(trail, hit.point));
                 }
-                else
+                else //Bullet miss
                 {
+                    Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
 
                     TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, (cam.transform.forward + new Vector3(randomX, randomY, randomZ)) * 100, Vector3.zero, false));
+                    StartCoroutine(SpawnTrail(trail, cam.transform.position + cam.transform.forward * 30));
                 }
             }
         }
-
         //Checking for any other hitscan weapons
         else
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity))
             {
-                CheckForEnemy(hit);
+                WhatDidIHit(hit);
 
                 Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
                  
                 TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                StartCoroutine(SpawnTrail(trail, hit.point));
             }
-            else
+            else //Bullet miss
             {
+                Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+
                 TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, cam.transform.forward * 100, Vector3.zero, false));
+                StartCoroutine(SpawnTrail(trail, cam.transform.position + cam.transform.forward * 30));
             }
         }
     }
 
-    void CheckForEnemy(RaycastHit _hit)
+    void WhatDidIHit(RaycastHit _hit)
     {
-        EnemyScript HitEnemyScript;
+        EnemyScript hitEnemyScript;
 
-        if (_hit.transform.gameObject.tag == "Enemy")
+        switch (_hit.transform.gameObject.tag)
         {
-            HitEnemyScript = _hit.transform.GetComponent<EnemyScript>();
-            HitEnemyScript.TakeDamage(damage);
-            Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal), _hit.transform);
-        }
-        else
-        {
-            Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
+            case "Enemy":
+                hitEnemyScript = _hit.transform.GetComponent<EnemyScript>();
+                hitEnemyScript.TakeDamage(damage);
+                Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal), _hit.transform);
+                break;
+            default:
+                Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
+                break;
         }
     }
 
@@ -259,7 +266,7 @@ public class GunScript : MonoBehaviour
 
     // ===========================================================ENUMERATORS===========================================================
 
-    IEnumerator SpawnTrail(TrailRenderer _trail, Vector3 _hit, Vector3 _hitNormal, bool _impact)
+    IEnumerator SpawnTrail(TrailRenderer _trail, Vector3 _hit)
     {
         float distance = Vector3.Distance(_trail.transform.position, _hit);
         float startDistance = distance;

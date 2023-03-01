@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb1709601f90f346ae730419ac0a266, type: 3}
+  m_Name: DebugLand
+  m_EditorClassIdentifier: 
+  iTiles:
+  - {fileID: 3430531031224645324, guid: f3908cb6141b5f24bb1971ae398d0d0c, type: 3}
+  tTiles:
+  - {fileID: 3164024596956081304, guid: 29b34bce4acf8bc4d9a7300c5966506f, type: 3}
+  hTiles:
+  - {fileID: 1468047909603071894, guid: a8bfd3a74067b1249a7da66cdc0f0a19, type: 3}
+  eTiles:
+  - {fileID: 6798974957429693568, guid: 8e214cc363aca8c4992630e6ee4d67f2, type: 3}
+  cTiles:
+  - {fileID: 8590067283313111471, guid: fe538a1569652d7408b0b84857d51993, type: 3}

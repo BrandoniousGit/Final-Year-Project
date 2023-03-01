@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 743348301271149115}
   - component: {fileID: 8454509996016852411}
   - component: {fileID: 3131669019874882246}
+  - component: {fileID: 9057679212055129903}
   m_Layer: 0
   m_Name: Perk Prefab
   m_TagString: Untagged
@@ -97,3 +98,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9057679212055129903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804468938426025833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a535b949c46ef8458596193354da77c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  isOn: 0
+  mainCam: {fileID: 0}
+  subCam: {fileID: 0}
+  m_door: {fileID: 0}
+  m_light: {fileID: 0}
+  m_genericObject: {fileID: 0}
+  interactKey: E
+  interactionType: 0
+  holdTime: 0
+  maxHoldTime: 0

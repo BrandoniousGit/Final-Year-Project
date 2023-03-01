@@ -15,6 +15,9 @@ TagManager:
   - Stone
   - Wood
   - GunFront
+  - MainCanvas
+  - Spawnpoint
+  - LG_Tiles
   layers:
   - Default
   - TransparentFX

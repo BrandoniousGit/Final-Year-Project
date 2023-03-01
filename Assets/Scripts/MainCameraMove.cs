@@ -15,6 +15,8 @@ public class MainCameraMove : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //interactionText = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<TextMeshProUGUI>();
     }
 
     void UserInput()

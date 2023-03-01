@@ -26,6 +26,6 @@ MonoBehaviour:
   m_shotgunPelletCount: 6
   m_damage: 1.2
   m_reloadTime: 2
-  m_timeBetweenShot: 0
+  m_timeBetweenShot: 0.5
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0.1

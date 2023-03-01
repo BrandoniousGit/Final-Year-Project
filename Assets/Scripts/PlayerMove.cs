@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
     private Rigidbody rb;
-    public GameObject gunHolder, gunHolderPos;
-    public float moveSpeed, jumpForce, slowdownMulti;
-    public bool grounded, crouching;
+    public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, walkSpeed, crouchSpeed;
+    public bool grounded, crouching, sideStepped;
 
     private void Start()
     {
@@ -26,16 +26,28 @@ public class PlayerMove : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-            Vector3 moveDir = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
-
-            rb.velocity = new Vector3(moveDir.x * moveSpeed, rb.velocity.y, moveDir.z * moveSpeed);
+            Vector3 _moveDir = CalcUserUnput(direction);
+            rb.velocity = new Vector3(_moveDir.x * moveSpeed, rb.velocity.y, _moveDir.z * moveSpeed);
         }
 
         else
         {
             rb.velocity = new Vector3(rb.velocity.x / slowdownMulti, rb.velocity.y, rb.velocity.z / slowdownMulti);
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && grounded && !sideStepped && !crouching)
+        {
+            Vector3 _moveDir = CalcUserUnput(direction);
+            Sidestep(_moveDir);
+        }
+    }
+
+    Vector3 CalcUserUnput(Vector3 _direction)
+    {
+        float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+        Vector3 moveDir = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
+
+        return moveDir;
     }
 
     void CheckGrounded()
@@ -71,30 +83,40 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void Crouching()
+    void Sidestep(Vector3 direction)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        Vector3 sideStepForceVec = new Vector3(sideStepForce * direction.x, 0, sideStepForce * direction.z);
+
+        if (Input.GetKey(KeyCode.A))
         {
-            crouching = true;
-            moveSpeed /= 1.5f;
-            gunHolderPos.transform.localPosition -= new Vector3(0, 0.05f, 0);
-            transform.localScale = new Vector3(transform.localScale.x, 1.0f, transform.localScale.z);
-            transform.localPosition -= new Vector3(0, 0.2f, 0);
+            sideStepped = true;
+            StartCoroutine("SidestepCooldown", sideStepCooldown);
+            rb.AddForce(sideStepForceVec);
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.D))
         {
-            crouching = false;
-            moveSpeed *= 1.5f;
-            gunHolderPos.transform.localPosition += new Vector3(0, 0.05f, 0);
-            transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
-            transform.localPosition += new Vector3(0, 0.2f, 0);
+            sideStepped = true;
+            StartCoroutine("SidestepCooldown", sideStepCooldown);
+            rb.AddForce(sideStepForceVec);
         }
     }
 
-    void GunHUDInfo()
+    void Crouching()
     {
-        gunHolder.transform.position = gunHolderPos.transform.position;
-        gunHolder.transform.rotation = gunHolderPos.transform.rotation;
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            crouching = true;
+            moveSpeed = crouchSpeed;
+            transform.localScale = new Vector3(transform.localScale.x, 1.0f, transform.localScale.z);
+            transform.localPosition -= new Vector3(0, 0.2f, 0);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            crouching = false;
+            moveSpeed = walkSpeed;
+            transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
+            transform.localPosition += new Vector3(0, 0.2f, 0);
+        }
     }
 
     void Update()
@@ -102,11 +124,16 @@ public class PlayerMove : MonoBehaviour
         Jumping();
         Crouching();
         CheckGrounded();
-        GunHUDInfo();
     }
 
     void LateUpdate()
     {
         UserInput();
+    }
+
+    IEnumerator SidestepCooldown(float m_sidestepCooldown)
+    {
+        yield return new WaitForSeconds(m_sidestepCooldown);
+        sideStepped = false;
     }
 }

@@ -26,6 +26,7 @@ public class PerkChest : Interactable
             perk2 = Instantiate(m_genericObject, transform.position + new Vector3(0, 1, -0.6f), new Quaternion(0, 0, 0, 1));
             isSelected = true;
         }
+
         else
         {
 
