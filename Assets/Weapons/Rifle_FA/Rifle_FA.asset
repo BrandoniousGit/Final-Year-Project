@@ -20,12 +20,12 @@ MonoBehaviour:
   m_gunName: Full Auto Rifle
   m_gunDescription: Standard Fully Automatic Rifle
   m_invSlot: 1
-  m_ammoInClip: 0
+  m_ammoInClip: 35
   m_clipSize: 35
   m_burstCount: 3
   m_shotgunPelletCount: 0
   m_damage: 3.8
   m_reloadTime: 0.9
-  m_timeBetweenShot: 0.24
+  m_timeBetweenShot: 0.17
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0

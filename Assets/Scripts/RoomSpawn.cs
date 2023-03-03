@@ -1,9 +1,10 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoomSpawn : MonoBehaviour
 {
-    private readonly float iChance = 25f, tChance = 15f, hChance = 5f, eChance = 35f, cChance = 20f;
+    private float iChance, tChance, hChance, eChance, cChance;
     //Chances for each room to spawn
     //public int needsExit;
     //1 = FORWARD
@@ -11,18 +12,35 @@ public class RoomSpawn : MonoBehaviour
     //3 = LEFT
     //4 = RIGHT
 
-    private Environment tiles;
+    private Environment _tiles;
+    public RoomList _roomList;
     private int rand;
     public bool canSpawnRoom = true;
 
     private void Start()
     {
-        tiles = GameObject.FindGameObjectWithTag("LG_Tiles").GetComponent<RoomList>().levelEnvironment;
-        Invoke(nameof(Spawn), 0.1f);
+        _roomList = GameObject.FindGameObjectWithTag("LG_Tiles").GetComponent<RoomList>();
+        _tiles = _roomList.levelEnvironment;
+
+        iChance = _tiles.m_iChance;
+        tChance = _tiles.m_tChance;
+        hChance = _tiles.m_hChance;
+        eChance = _tiles.m_eChance;
+        cChance = _tiles.m_cChance;
+
+        if (tag == "FirstSpawnPoint")
+        {
+            Instantiate(_tiles.hTiles[0], transform.position, transform.rotation);
+        }
+        else
+        {
+            Invoke(nameof(Spawn), 0.1f);
+        }
     }
 
     private void Update()
     {
+        //Debugging
         if (Input.GetKeyDown(KeyCode.G))
         {
             Spawn();
@@ -31,6 +49,7 @@ public class RoomSpawn : MonoBehaviour
 
     private float ReturnChance(int amount)
     {
+        //Randomly picks a tile to spawn, make sure tile chances add to 100
         return amount switch
         {
             0 => iChance,
@@ -94,34 +113,41 @@ public class RoomSpawn : MonoBehaviour
             GameObject clone;
             if (rand <= ReturnChance(0))
             {
-                clone = Instantiate(tiles.iTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.iTiles[0], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
+                _roomList.rooms.Append(clone);
                 //I TILES
             }
             else if (rand > ReturnChance(0) && rand <= ReturnChance(1))
             {
-                clone = Instantiate(tiles.tTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.tTiles[0], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
+                _roomList.rooms.Append(clone);
                 //T TILES
             }
             else if (rand > ReturnChance(1) && rand <= ReturnChance(2))
             {
-                clone = Instantiate(tiles.hTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.hTiles[0], transform.position, transform.rotation);
+                _roomList.rooms.Append(clone);
                 //H TILES
             }
             else if (rand > ReturnChance(2) && rand <= ReturnChance(3))
             {
-                clone = Instantiate(tiles.eTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.eTiles[0], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
+                _roomList.rooms.Append(clone);
                 //E TILES
             }
             else if (rand > ReturnChance(3) && rand <= ReturnChance(4))
             {
-                clone = Instantiate(tiles.cTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.cTiles[0], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
+                _roomList.rooms.Append(clone);
                 //C TILES
             }
+            //Tiles are rotated to make sure they face somewhere with an entrance
         }
+        //Stops the spawner from creating more rooms after it's initial spawn
         canSpawnRoom = false;
     }
 

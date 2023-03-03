@@ -18,6 +18,7 @@ TagManager:
   - MainCanvas
   - Spawnpoint
   - LG_Tiles
+  - FirstSpawnPoint
   layers:
   - Default
   - TransparentFX
