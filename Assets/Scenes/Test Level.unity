@@ -230,9 +230,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelEnvironment: {fileID: 11400000, guid: 63fda511c79189940afa5ebe71238a27, type: 2}
   rooms: []
-  maxRooms: 100
-  minRooms: 100
+  maxRooms: 25
+  minRooms: 10
   roomCount: 0
+  levelReady: 0
 --- !u!4 &195766964
 Transform:
   m_ObjectHideFlags: 0

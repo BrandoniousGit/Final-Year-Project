@@ -34,7 +34,7 @@ public class RoomSpawn : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(Spawn), 0.1f);
+            Invoke(nameof(Spawn), 0.05f);
         }
     }
 
