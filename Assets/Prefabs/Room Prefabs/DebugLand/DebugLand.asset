@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 6798974957429693568, guid: 8e214cc363aca8c4992630e6ee4d67f2, type: 3}
   cTiles:
   - {fileID: 8590067283313111471, guid: fe538a1569652d7408b0b84857d51993, type: 3}
+  - {fileID: 8590067283313111471, guid: ae019cbf53467d54f8ae53864480a60b, type: 3}
   m_minTiles: 0
   m_maxTiles: 0
   m_iChance: 25

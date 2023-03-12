@@ -13,11 +13,11 @@ public class RoomSpawn : MonoBehaviour
     //4 = RIGHT
 
     private Environment _tiles;
-    public RoomList _roomList;
-    private int rand;
+    private RoomList _roomList;
+    private float rand;
     public bool canSpawnRoom = true;
 
-    private void Start()
+    private void Awake()
     {
         _roomList = GameObject.FindGameObjectWithTag("LG_Tiles").GetComponent<RoomList>();
         _tiles = _roomList.levelEnvironment;
@@ -43,13 +43,13 @@ public class RoomSpawn : MonoBehaviour
         //Debugging
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Spawn();
+            //Spawn();
         }
     }
 
     private float ReturnChance(int amount)
     {
-        //Randomly picks a tile to spawn, make sure tile chances add to 100
+        //Randomly picks a tile to spawn
         return amount switch
         {
             0 => iChance,
@@ -61,88 +61,39 @@ public class RoomSpawn : MonoBehaviour
         };
     }
 
-    /*Vector3 returnRot(int roomType)
-    {
-        switch(roomType)
-        {
-            case 1:
-                //I Tiles
-                return needsExit switch
-                {
-                    1 => new Vector3(0, 90, 0),
-                    2 => new Vector3(0, -90, 0),
-                    _ => new Vector3(0, 0, 0),
-                };
-            case 2:
-                //T Tiles
-                return needsExit switch
-                {
-                    1 => new Vector3(0, 90, 0),
-                    _ => new Vector3(0, 0, 0),
-                };
-            case 3:
-                //Hub Tiles
-                return new Vector3(0, 0, 0);
-            case 4:
-                //End Tiles
-                return needsExit switch
-                {
-                    1 => new Vector3(0, 90, 0),
-                    2 => new Vector3(0, -90, 0),
-                    4 => new Vector3(0, 180, 0),
-                    _ => new Vector3(0, 0, 0),
-                };
-            case 5:
-                //Corner Tiles
-                return needsExit switch
-                {
-                    1 => new Vector3(0, 90, 0),
-                    4 => new Vector3(0, 180, 0),
-                    _ => new Vector3(0, 0, 0),
-                };
-            default:
-                return new Vector3(0, 0, 0);
-        }
-    }*/
-
     private void Spawn()
     {
         if (canSpawnRoom)
         {
-            rand = Random.Range(0, 101);
+            rand = Random.Range(0, ReturnChance(4));
             GameObject clone;
             if (rand <= ReturnChance(0))
             {
-                clone = Instantiate(_tiles.iTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.iTiles[Random.Range(0, _tiles.iTiles.Length)], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
-                _roomList.rooms.Append(clone);
                 //I TILES
             }
             else if (rand > ReturnChance(0) && rand <= ReturnChance(1))
             {
-                clone = Instantiate(_tiles.tTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.tTiles[Random.Range(0, _tiles.tTiles.Length)], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
-                _roomList.rooms.Append(clone);
                 //T TILES
             }
             else if (rand > ReturnChance(1) && rand <= ReturnChance(2))
             {
-                clone = Instantiate(_tiles.hTiles[0], transform.position, transform.rotation);
-                _roomList.rooms.Append(clone);
+                clone = Instantiate(_tiles.hTiles[Random.Range(0, _tiles.hTiles.Length)], transform.position, transform.rotation);
                 //H TILES
             }
             else if (rand > ReturnChance(2) && rand <= ReturnChance(3))
             {
-                clone = Instantiate(_tiles.eTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.eTiles[Random.Range(0, _tiles.eTiles.Length)], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
-                _roomList.rooms.Append(clone);
                 //E TILES
             }
             else if (rand > ReturnChance(3) && rand <= ReturnChance(4))
             {
-                clone = Instantiate(_tiles.cTiles[0], transform.position, transform.rotation);
+                clone = Instantiate(_tiles.cTiles[Random.Range(0, _tiles.cTiles.Length)], transform.position, transform.rotation);
                 clone.transform.LookAt(transform.parent.transform);
-                _roomList.rooms.Append(clone);
                 //C TILES
             }
             //Tiles are rotated to make sure they face somewhere with an entrance
@@ -151,12 +102,56 @@ public class RoomSpawn : MonoBehaviour
         canSpawnRoom = false;
     }
 
+    private void ConflictSpawn(Vector3 pos, Quaternion rot)
+    {
+        rand = Random.Range(0, ReturnChance(4));
+        GameObject clone;
+        if (rand <= ReturnChance(0))
+        {
+            clone = Instantiate(_tiles.iTiles[Random.Range(0, _tiles.iTiles.Length)], pos, rot);
+            clone.transform.LookAt(transform.parent.transform);
+            //I TILES
+        }
+        else if (rand > ReturnChance(0) && rand <= ReturnChance(1))
+        {
+            clone = Instantiate(_tiles.tTiles[Random.Range(0, _tiles.tTiles.Length)], pos, rot);
+            clone.transform.LookAt(transform.parent.transform);
+            //T TILES
+        }
+        else if (rand > ReturnChance(1) && rand <= ReturnChance(2))
+        {
+            clone = Instantiate(_tiles.hTiles[Random.Range(0, _tiles.hTiles.Length)], pos, rot);
+            //H TILES
+        }
+        else if (rand > ReturnChance(2) && rand <= ReturnChance(3))
+        {
+            clone = Instantiate(_tiles.eTiles[Random.Range(0, _tiles.eTiles.Length)], pos, rot);
+            clone.transform.LookAt(transform.parent.transform);
+            //E TILES
+        }
+        else if (rand > ReturnChance(3) && rand <= ReturnChance(4))
+        {
+            clone = Instantiate(_tiles.cTiles[Random.Range(0, _tiles.cTiles.Length)], pos, rot);
+            clone.transform.LookAt(transform.parent.transform);
+            //C TILES
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Destroy the trigger if it hits another
-        if(other.CompareTag("Spawnpoint"))
+        if(other.CompareTag("Spawnpoint") || other.CompareTag("FirstSpawnPoint"))
         {
-            Destroy(gameObject);
+            if (!other.gameObject.GetComponent<RoomSpawn>().canSpawnRoom)
+            {
+                canSpawnRoom = false;
+            }
+            if (other.gameObject.GetComponent<RoomSpawn>().canSpawnRoom && canSpawnRoom)
+            {
+                canSpawnRoom = false;
+                ConflictSpawn(transform.position, transform.rotation);
+                //Debug.Log("Conflict at\nX: " + transform.position.x / 32 + "\nZ: " + transform.position.z / 32);
+            }
         }
     }
 }

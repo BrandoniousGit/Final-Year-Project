@@ -229,8 +229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEnvironment: {fileID: 11400000, guid: 63fda511c79189940afa5ebe71238a27, type: 2}
-  rooms:
-  - {fileID: 0}
+  rooms: []
+  maxRooms: 100
+  minRooms: 100
+  roomCount: 0
 --- !u!4 &195766964
 Transform:
   m_ObjectHideFlags: 0
@@ -1131,7 +1133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ef2ddf86bb3e54b959755ef0b2cef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomList: {fileID: 0}
   canSpawnRoom: 0
 --- !u!4 &2133334006
 Transform:

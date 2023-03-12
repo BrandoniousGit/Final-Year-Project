@@ -856,6 +856,7 @@ GameObject:
   - component: {fileID: 3164024596956081309}
   - component: {fileID: 3164024596956081310}
   - component: {fileID: 3164024596956081311}
+  - component: {fileID: 5561144636901662425}
   m_Layer: 0
   m_Name: T-Shape
   m_TagString: Untagged
@@ -1149,7 +1150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 783c046d675924849b5018df86814d77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1193,6 +1194,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5561144636901662425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164024596956081304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2745851475e2b9d4192b32ff3b59a770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5022635673023755763
 GameObject:
   m_ObjectHideFlags: 0
