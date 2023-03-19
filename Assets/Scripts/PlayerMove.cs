@@ -107,15 +107,15 @@ public class PlayerMove : MonoBehaviour
         {
             crouching = true;
             moveSpeed = crouchSpeed;
-            transform.localScale = new Vector3(transform.localScale.x, 1.0f, transform.localScale.z);
-            transform.localPosition -= new Vector3(0, 0.2f, 0);
+            transform.localScale = new Vector3(transform.localScale.x, 0.9f, transform.localScale.z);
+            transform.localPosition -= new Vector3(0, 0.3f, 0);
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             crouching = false;
             moveSpeed = walkSpeed;
             transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
-            transform.localPosition += new Vector3(0, 0.2f, 0);
+            transform.localPosition += new Vector3(0, 0.3f, 0);
         }
     }
 

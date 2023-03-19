@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: deb1709601f90f346ae730419ac0a266, type: 3}
-  m_Name: DebugLand
+  m_Name: DebugLandMed
   m_EditorClassIdentifier: 
   iTiles:
   - {fileID: 3430531031224645324, guid: f3908cb6141b5f24bb1971ae398d0d0c, type: 3}
@@ -21,7 +21,7 @@ MonoBehaviour:
   eTiles:
   - {fileID: 6798974957429693568, guid: 8e214cc363aca8c4992630e6ee4d67f2, type: 3}
   cTiles:
-  - {fileID: 8590067283313111471, guid: fe538a1569652d7408b0b84857d51993, type: 3}
+  - {fileID: 5571682720204306664, guid: fe538a1569652d7408b0b84857d51993, type: 3}
   - {fileID: 8590067283313111471, guid: ae019cbf53467d54f8ae53864480a60b, type: 3}
   m_minTiles: 0
   m_maxTiles: 0
