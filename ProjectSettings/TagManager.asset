@@ -19,6 +19,8 @@ TagManager:
   - Spawnpoint
   - LG_Tiles
   - FirstSpawnPoint
+  - BossDoor
+  - EndTile
   layers:
   - Default
   - TransparentFX

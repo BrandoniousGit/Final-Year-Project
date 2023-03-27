@@ -25,7 +25,7 @@ public class WeaponSelect : MonoBehaviour
                 clone.GetComponent<Button>().onClick.AddListener(delegate { AddToWeaponManager(weapon, weapon.m_invSlot); });
                 if (!once1)
                 {
-                    currentSelPrim.text = string.Format("Current: {0}", weapon.m_gunName);
+                    currentSelPrim.text = string.Format("{0}", weapon.m_gunName);
                     currentSelPrimDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                     once1 = !once1;
                 }
@@ -38,7 +38,7 @@ public class WeaponSelect : MonoBehaviour
                 clone.GetComponent<Button>().onClick.AddListener(delegate { AddToWeaponManager(weapon, weapon.m_invSlot); });
                 if (!once2)
                 {
-                    currentSelSec.text = string.Format("Current: {0}", weapon.m_gunName);
+                    currentSelSec.text = string.Format("{0}", weapon.m_gunName);
                     currentSelSecDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                     once2 = !once2;
                 }
@@ -52,13 +52,13 @@ public class WeaponSelect : MonoBehaviour
         {
             case 0:
                 weaponsManager.GetComponent<WeaponsManager>().primaryWeapon = weapon;
-                currentSelPrim.text = string.Format("Current: {0}", weapon.m_gunName);
+                currentSelPrim.text = string.Format("{0}", weapon.m_gunName);
                 currentSelPrimDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
 
                 break;
             case 1:
                 weaponsManager.GetComponent<WeaponsManager>().secondaryWeapon = weapon;
-                currentSelSec.text = string.Format("Current: {0}", weapon.m_gunName);
+                currentSelSec.text = string.Format("{0}", weapon.m_gunName);
                 currentSelSecDesc.text = string.Format("{0}\n\nDamage: {1} | Clip Size: {2}\nReload Speed: {3}", weapon.m_gunDescription, weapon.m_damage, weapon.m_clipSize, weapon.m_reloadTime);
                 break;
         }

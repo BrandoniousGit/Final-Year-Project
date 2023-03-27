@@ -20,7 +20,7 @@ MonoBehaviour:
   m_gunName: Pistol
   m_gunDescription: Trusty Pistol
   m_invSlot: 0
-  m_ammoInClip: 20
+  m_ammoInClip: 16
   m_clipSize: 20
   m_burstCount: 0
   m_shotgunPelletCount: 0

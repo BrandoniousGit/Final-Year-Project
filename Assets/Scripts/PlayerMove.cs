@@ -1,15 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
     private Rigidbody rb;
-    public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, walkSpeed, crouchSpeed;
+    public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, airMulti, slamSpeed;
     public bool grounded, crouching, sideStepped;
 
     private void Start()
@@ -27,7 +23,22 @@ public class PlayerMove : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             Vector3 _moveDir = CalcUserUnput(direction);
-            rb.velocity = new Vector3(_moveDir.x * moveSpeed, rb.velocity.y, _moveDir.z * moveSpeed);
+            Vector3 mag = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+            if (!grounded)
+            {
+                rb.AddForce(new Vector3(_moveDir.x * moveSpeed * airMulti * Time.deltaTime, 0, _moveDir.z * moveSpeed * airMulti * Time.deltaTime));
+
+                if (mag.magnitude > moveSpeed)
+                {
+                    rb.velocity = new Vector3(rb.velocity.normalized.x * moveSpeed, rb.velocity.y, rb.velocity.normalized.z * moveSpeed);
+                }
+            }
+
+            else
+            {
+                rb.velocity = new Vector3(_moveDir.x * moveSpeed, rb.velocity.y, _moveDir.z * moveSpeed);
+            }
         }
 
         else
@@ -54,7 +65,7 @@ public class PlayerMove : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.SphereCast(transform.position, 0.5f, Vector3.down, out hit, 0.72f))
+        if (Physics.SphereCast(transform.position, 0.5f, Vector3.down, out hit, 0.71f))
         {
             grounded = true;
         }
@@ -66,10 +77,9 @@ public class PlayerMove : MonoBehaviour
 
     void Jumping()
     {
-
         if (!grounded)
         {
-            slowdownMulti = 1.04f;
+            slowdownMulti = 1.01f;
         }
         else
         {
@@ -78,6 +88,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
+            grounded = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(0, jumpForce, 0);
         }
@@ -93,7 +104,22 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine("SidestepCooldown", sideStepCooldown);
             rb.AddForce(sideStepForceVec);
         }
+
         if (Input.GetKey(KeyCode.D))
+        {
+            sideStepped = true;
+            StartCoroutine("SidestepCooldown", sideStepCooldown);
+            rb.AddForce(sideStepForceVec);
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            sideStepped = true;
+            StartCoroutine("SidestepCooldown", sideStepCooldown);
+            rb.AddForce(sideStepForceVec);
+        }
+
+        if (Input.GetKey(KeyCode.S))
         {
             sideStepped = true;
             StartCoroutine("SidestepCooldown", sideStepCooldown);
@@ -103,17 +129,32 @@ public class PlayerMove : MonoBehaviour
 
     void Crouching()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (!grounded)
+        {
+            if (crouching)
+            {
+                crouching = false;
+                transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
+                transform.localPosition += new Vector3(0, 0.3f, 0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                rb.velocity = new Vector3(0, slamSpeed, 0);
+            }
+
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl) && !crouching)
         {
             crouching = true;
-            moveSpeed = crouchSpeed;
             transform.localScale = new Vector3(transform.localScale.x, 0.9f, transform.localScale.z);
             transform.localPosition -= new Vector3(0, 0.3f, 0);
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(KeyCode.LeftControl) && crouching)
         {
             crouching = false;
-            moveSpeed = walkSpeed;
             transform.localScale = new Vector3(transform.localScale.x, 1.2f, transform.localScale.z);
             transform.localPosition += new Vector3(0, 0.3f, 0);
         }

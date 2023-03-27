@@ -34,7 +34,7 @@ public class RoomSpawn : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(Spawn), 0.05f);
+            Invoke(nameof(Spawn), 0.1f);
         }
     }
 
@@ -104,6 +104,7 @@ public class RoomSpawn : MonoBehaviour
 
     private void ConflictSpawn(Vector3 pos, Quaternion rot)
     {
+        Debug.LogWarning("Running conflict spawn!");
         rand = Random.Range(0, ReturnChance(4));
         GameObject clone;
         if (rand <= ReturnChance(0))
@@ -139,8 +140,14 @@ public class RoomSpawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("FirstSpawnPoint"))
+        {
+            canSpawnRoom = false;
+            return;
+        }
+
         //Destroy the trigger if it hits another
-        if(other.CompareTag("Spawnpoint") || other.CompareTag("FirstSpawnPoint"))
+        if(other.CompareTag("Spawnpoint"))
         {
             if (!other.gameObject.GetComponent<RoomSpawn>().canSpawnRoom)
             {

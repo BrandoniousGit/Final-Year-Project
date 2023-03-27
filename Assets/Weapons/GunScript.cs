@@ -111,6 +111,7 @@ public class GunScript : MonoBehaviour
                 {
                     CheckRay(gunObject.m_gunType);
                     gunObject.m_ammoInClip -= 1;
+                    //gunObject.m_model.GetComponent<Animator>().Play("PistolShoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
                 }
                 break;
