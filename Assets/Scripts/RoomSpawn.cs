@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class RoomSpawn : MonoBehaviour
 {
+    //Chance for each tile to spawn
     private float iChance, tChance, hChance, eChance, cChance;
-    //Chances for each room to spawn
-    //public int needsExit;
-    //1 = FORWARD
-    //2 = BACK
-    //3 = LEFT
-    //4 = RIGHT
 
     private Environment _tiles;
     private RoomList _roomList;
@@ -30,7 +25,8 @@ public class RoomSpawn : MonoBehaviour
 
         if (tag == "FirstSpawnPoint")
         {
-            Instantiate(_tiles.hTiles[0], transform.position, transform.rotation);
+            GameObject _spawnRoom = Instantiate(_tiles.hTiles[0], transform.position, transform.rotation);
+            _spawnRoom.tag = "SpawnRoom";
         }
         else
         {

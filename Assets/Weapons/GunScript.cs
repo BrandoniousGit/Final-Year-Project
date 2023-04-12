@@ -1,22 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 using static GunObject;
 
 public class GunScript : MonoBehaviour
 {
     public GunObject gunObject;
-    public GameObject weaponManager, backupWeaponManager;
+    public GameObject weaponManager, backupWeaponManager, muzzleFlash;
     public WeaponsManager weaponManagerScript;
-    public ParticleSystem muzzleFlash;
 
     public TextMeshProUGUI gunInfo;
 
     private GameObject PrimaryWeaponClone, SecondaryWeaponClone;
     private Vector3 weaponMuzzlePos;
+
+    private GameObject m_currentWeapon;
 
     public int clipSize, ammoInClip;
     public float damage;
@@ -41,6 +39,7 @@ public class GunScript : MonoBehaviour
 
             PrimaryWeaponClone = Instantiate(weaponManagerScript.primaryWeapon.m_model, transform);
             SecondaryWeaponClone = Instantiate(weaponManagerScript.secondaryWeapon.m_model, transform);
+            m_currentWeapon = PrimaryWeaponClone;
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
@@ -53,6 +52,7 @@ public class GunScript : MonoBehaviour
 
             PrimaryWeaponClone = Instantiate(weaponManagerScript.primaryWeapon.m_model, transform);
             SecondaryWeaponClone = Instantiate(weaponManagerScript.secondaryWeapon.m_model, transform);
+            m_currentWeapon = PrimaryWeaponClone;
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
@@ -81,6 +81,7 @@ public class GunScript : MonoBehaviour
             {
                 SecondaryWeaponClone.SetActive(false);
                 PrimaryWeaponClone.SetActive(true);
+                m_currentWeapon = PrimaryWeaponClone;
                 gunObject = weaponManagerScript.primaryWeapon;
                 GunInitialise(gunObject);
             }
@@ -93,6 +94,7 @@ public class GunScript : MonoBehaviour
             {
                 SecondaryWeaponClone.SetActive(true);
                 PrimaryWeaponClone.SetActive(false);
+                m_currentWeapon = SecondaryWeaponClone;
                 gunObject = weaponManagerScript.secondaryWeapon;
                 GunInitialise(gunObject);
             }
@@ -103,7 +105,7 @@ public class GunScript : MonoBehaviour
     //Shoot function
     void WeaponShoot(GunType gunType)
     {
-        switch (gunObject.m_gunType)
+        switch (gunType)
         {
             //Semi Automatic weapons
             case GunType.SemiAuto:
@@ -111,7 +113,7 @@ public class GunScript : MonoBehaviour
                 {
                     CheckRay(gunObject.m_gunType);
                     gunObject.m_ammoInClip -= 1;
-                    //gunObject.m_model.GetComponent<Animator>().Play("PistolShoot");
+                    m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
                 }
                 break;
@@ -132,6 +134,7 @@ public class GunScript : MonoBehaviour
                 {
                     CheckRay(gunObject.m_gunType);
                     gunObject.m_ammoInClip -= 1;
+                    m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
                 }
                 break;
@@ -160,6 +163,7 @@ public class GunScript : MonoBehaviour
     void WeaponReload()
     {
         reloading = true;
+        m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Reload");
         Debug.Log("Reloading!");
         StartCoroutine("Reloading", gunObject.m_reloadTime);
     }
@@ -196,14 +200,14 @@ public class GunScript : MonoBehaviour
                 {
                     WhatDidIHit(hit);
 
-                    Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+                    SpawnMuzzleFlash();
 
                     TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hit.point));
                 }
                 else //Bullet miss
                 {
-                    Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+                    SpawnMuzzleFlash();
 
                     TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, cam.transform.position + cam.transform.forward * 30));
@@ -217,14 +221,14 @@ public class GunScript : MonoBehaviour
             {
                 WhatDidIHit(hit);
 
-                Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
-                 
+                SpawnMuzzleFlash();
+
                 TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit.point));
             }
             else //Bullet miss
             {
-                Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+                SpawnMuzzleFlash();
 
                 TrailRenderer trail = Instantiate(gunObject.m_bulletTrail, weaponMuzzlePos, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, cam.transform.position + cam.transform.forward * 30));
@@ -232,14 +236,20 @@ public class GunScript : MonoBehaviour
         }
     }
 
+    void SpawnMuzzleFlash()
+    {
+        GameObject muzzleflashClone = Instantiate(muzzleFlash, weaponMuzzlePos, Quaternion.identity, transform);
+        StartCoroutine(DestroyAfterX(muzzleflashClone, 0.3f));
+    }
+
     void WhatDidIHit(RaycastHit _hit)
     {
-        EnemyScript hitEnemyScript;
+        EnemyAgent hitEnemyScript;
 
         switch (_hit.transform.gameObject.tag)
         {
             case "Enemy":
-                hitEnemyScript = _hit.transform.GetComponent<EnemyScript>();
+                hitEnemyScript = _hit.transform.GetComponent<EnemyAgent>();
                 hitEnemyScript.TakeDamage(damage);
                 Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal), _hit.transform);
                 break;
@@ -276,7 +286,7 @@ public class GunScript : MonoBehaviour
         while (distance > 0)
         {
             _trail.transform.position = Vector3.Lerp(_trail.transform.position, _hit, 1 - (distance / startDistance));
-            distance -= Time.deltaTime * 200;
+            distance -= Time.deltaTime * 300;
 
             yield return null;
         }
@@ -319,18 +329,14 @@ public class GunScript : MonoBehaviour
     {
         yield return new WaitForSeconds(reloadTime);
         gunObject.m_ammoInClip = clipSize;
-        /*if (gunObject.m_ammoInReserve + gunObject.m_ammoInClip < clipSize)
-        {
-            gunObject.m_ammoInClip += gunObject.m_ammoInReserve;
-            gunObject.m_ammoInReserve = 0;
-        }
-        else
-        {
-            int diff = clipSize - gunObject.m_ammoInClip;
-            gunObject.m_ammoInClip = clipSize;
-            gunObject.m_ammoInReserve -= diff;
-        }*/
+
         reloading = false;
         Debug.Log("Reloaded");
+    }
+
+    IEnumerator DestroyAfterX(GameObject objectDestroy, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(objectDestroy);
     }
 }

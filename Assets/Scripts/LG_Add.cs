@@ -6,8 +6,10 @@ using UnityEngine;
 public class LG_Add : MonoBehaviour
 {
     private RoomList _roomList;
-    public GameObject bossDoor;
+    public GameObject bossDoor, enemyChecker;
     public bool bossRoom;
+    public List<GameObject> doorList;
+
     void Awake()
     {
         _roomList = GameObject.FindGameObjectWithTag("LG_Tiles").GetComponent<RoomList>();
@@ -16,6 +18,11 @@ public class LG_Add : MonoBehaviour
         if (tag == "EndTile")
         {
             _roomList.endRooms.Add(gameObject);
+        }
+
+        if (Random.Range(0,100) > 50)
+        {
+            enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom = true;
         }
     }
 
@@ -29,6 +36,33 @@ public class LG_Add : MonoBehaviour
         if (bossRoom)
         {
             bossDoor.SetActive(true);
+        }
+
+        if (gameObject.tag == "SpawnRoom")
+        {
+            enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom = false;
+        }
+
+        if (_roomList.levelReady)
+        {
+            if (enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom)
+            {
+                if (enemyChecker.GetComponent<EnemyCheckerScript>().playerEnteredRoom && !enemyChecker.GetComponent<EnemyCheckerScript>().fightFinished)
+                {
+                    for (int i = 0; i < doorList.Count; i++)
+                    {
+                        doorList[i].transform.position = Vector3.Lerp(doorList[i].transform.position, new Vector3(doorList[i].transform.position.x, 4, doorList[i].transform.position.z), 0.03f);
+                    }
+                }
+
+                if (enemyChecker.GetComponent<EnemyCheckerScript>().fightFinished)
+                {
+                    for (int i = 0; i < doorList.Count; i++)
+                    {
+                        doorList[i].transform.position = Vector3.Lerp(doorList[i].transform.position, new Vector3(doorList[i].transform.position.x, -3, doorList[i].transform.position.z), 0.03f);
+                    }
+                }
+            }
         }
     }
 }

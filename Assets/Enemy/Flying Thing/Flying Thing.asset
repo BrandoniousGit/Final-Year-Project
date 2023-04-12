@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6665ca60eddb39e439566f9cb08b50e9, type: 3}
   m_Name: Flying Thing
   m_EditorClassIdentifier: 
-  m_maxHP: 500
+  m_model: {fileID: 332591297717074679, guid: dbac96fd8989b174b8cc54b1665143bb, type: 3}
+  m_maxHP: 90
   m_damage: 5
   m_moveSpeed: 1
   m_name: Flying Thing

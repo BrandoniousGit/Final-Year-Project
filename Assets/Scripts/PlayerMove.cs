@@ -13,6 +13,20 @@ public class PlayerMove : MonoBehaviour
         cam = Camera.main;
         rb = GetComponent<Rigidbody>();
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EnemyChecker")
+        {
+            EnemyCheckerScript _enemyCheckerScript = other.gameObject.GetComponent<EnemyCheckerScript>();
+
+            if (_enemyCheckerScript.fightFinished)
+            {
+                return;
+            }
+
+            _enemyCheckerScript.playerEnteredRoom = true;
+        }
+    }
 
     void UserInput()
     {
@@ -31,7 +45,7 @@ public class PlayerMove : MonoBehaviour
 
                 if (mag.magnitude > moveSpeed)
                 {
-                    rb.velocity = new Vector3(rb.velocity.normalized.x * moveSpeed, rb.velocity.y, rb.velocity.normalized.z * moveSpeed);
+                    rb.velocity = new Vector3(rb.velocity.x / 1.03f, rb.velocity.y, rb.velocity.z / 1.03f);
                 }
             }
 
@@ -131,6 +145,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (!grounded)
         {
+            //Uncrouches the player while they are airborne
             if (crouching)
             {
                 crouching = false;
@@ -138,6 +153,7 @@ public class PlayerMove : MonoBehaviour
                 transform.localPosition += new Vector3(0, 0.3f, 0);
             }
 
+            //Allows for the user to slam if airborne
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 rb.velocity = new Vector3(0, slamSpeed, 0);
@@ -146,12 +162,15 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+        //Crouched
         if (Input.GetKey(KeyCode.LeftControl) && !crouching)
         {
             crouching = true;
             transform.localScale = new Vector3(transform.localScale.x, 0.9f, transform.localScale.z);
             transform.localPosition -= new Vector3(0, 0.3f, 0);
         }
+
+        //Uncrouched
         if (Input.GetKeyUp(KeyCode.LeftControl) && crouching)
         {
             crouching = false;

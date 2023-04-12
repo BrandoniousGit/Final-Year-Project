@@ -21,6 +21,10 @@ TagManager:
   - FirstSpawnPoint
   - BossDoor
   - EndTile
+  - EnemyChecker
+  - LevelManager
+  - SpawnRoom
+  - EnemyManager
   layers:
   - Default
   - TransparentFX

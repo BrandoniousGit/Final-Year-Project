@@ -1,7 +1,4 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class RoomList : MonoBehaviour
@@ -19,6 +16,8 @@ public class RoomList : MonoBehaviour
 
     private GameObject firstSpawn;
 
+    private GameObject _levelManager;
+
     private void Start()
     {
         maxRooms = levelEnvironment.m_maxTiles;
@@ -28,7 +27,12 @@ public class RoomList : MonoBehaviour
         firstSpawn = GameObject.FindGameObjectWithTag("FirstSpawnPoint");
         levelReady = false;
         //First check for if the level is big enough/too big after 2.0s
-        Invoke(nameof(CheckRoomCount), 1.5f);
+        Invoke(nameof(CheckRoomCount), 2.0f);
+    }
+
+    public void Awake()
+    {
+        _levelManager = GameObject.FindGameObjectWithTag("LevelManager");
     }
 
     void CheckRoomCount()
@@ -48,28 +52,27 @@ public class RoomList : MonoBehaviour
         {
             int bossRoom = Random.Range(0, endRoomCount - 1);
 
+            endRooms[bossRoom].GetComponent<LG_Add>().SetBossRoom();
+
             int keyRoom = Random.Range(1, roomCount - 1);
 
-            while (keyRoom == bossRoom)
+            int chestRoom = Random.Range(1, roomCount - 1);
+
+            while (rooms[keyRoom].GetComponent<LG_Add>().bossDoor)
             {
                 keyRoom = Random.Range(1, roomCount - 1);
             }
 
-            int chestRoom = Random.Range(1, roomCount - 1);
-
-            while (chestRoom == bossRoom || chestRoom == keyRoom)
+            while (rooms[chestRoom].GetComponent<LG_Add>().bossDoor)
             {
                 chestRoom = Random.Range(1, roomCount - 1);
             }
 
-            Debug.Log(bossRoom);
-
-            Instantiate(bossKey, rooms[keyRoom].transform.position + new Vector3(0, 1, 0), rooms[keyRoom].transform.rotation);
-            Instantiate(chest, rooms[chestRoom].transform.position + new Vector3(0, 1, 0), rooms[keyRoom].transform.rotation);
-
-            endRooms[bossRoom].GetComponent<LG_Add>().SetBossRoom();
+            Instantiate(bossKey, rooms[keyRoom].transform.position + new Vector3(0, 3, 0), rooms[keyRoom].transform.rotation);
+            Instantiate(chest, rooms[chestRoom].transform.position + new Vector3(0, 1.5f, 0), rooms[chestRoom].transform.rotation);
 
             levelReady = true;
+            _levelManager.GetComponent<LevelManager>().SetLevelIsReady(true);
         }
     }
 
@@ -87,7 +90,8 @@ public class RoomList : MonoBehaviour
             endRooms.RemoveAt(i);
         }
 
-        Instantiate(levelEnvironment.hTiles[0], firstSpawn.transform.position, firstSpawn.transform.rotation);
+        GameObject _spawnRoom = Instantiate(levelEnvironment.hTiles[0], firstSpawn.transform.position, firstSpawn.transform.rotation);
+        _spawnRoom.tag = "SpawnRoom";
         Invoke(nameof(CheckRoomCount), 1.5f);
     }
 
