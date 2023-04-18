@@ -11,6 +11,7 @@ public class Environment : ScriptableObject
     public GameObject[] hTiles; //Hub Tiles (4 Exits)
     public GameObject[] eTiles; //End Tiles (1 Exits)
     public GameObject[] cTiles; //Corner Tiles (2 Exits)
+    public GameObject[] bossTile; //BossTiles
 
     public int m_minTiles, m_maxTiles;
 

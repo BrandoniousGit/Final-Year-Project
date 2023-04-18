@@ -15,8 +15,6 @@ public class MainCameraMove : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //interactionText = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<TextMeshProUGUI>();
     }
 
     void UserInput()
@@ -53,7 +51,11 @@ public class MainCameraMove : MonoBehaviour
                 HandleInteraction(iOScript);
                 interactionText.text = iOScript.GetDescription();
             }
-            else { interactionText.text = ""; }
+
+            else 
+            {
+                interactionText.text = "";
+            }
         }
         else
         {
@@ -91,6 +93,15 @@ public class MainCameraMove : MonoBehaviour
 
     void Update()
     {
+        if (interactionText == null)
+        {
+            if (GameObject.FindGameObjectWithTag("InteractionText").GetComponent<TextMeshProUGUI>() == null)
+            {
+                return;
+            }
+            interactionText = GameObject.FindGameObjectWithTag("InteractionText").GetComponent<TextMeshProUGUI>();
+        }
+
         UserInput();
         UserInteract();
     }

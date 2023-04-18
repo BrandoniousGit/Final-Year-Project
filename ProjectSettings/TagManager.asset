@@ -25,6 +25,7 @@ TagManager:
   - LevelManager
   - SpawnRoom
   - EnemyManager
+  - InteractionText
   layers:
   - Default
   - TransparentFX

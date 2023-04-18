@@ -485,8 +485,6 @@ MonoBehaviour:
   bossDoor: {fileID: 6073465057703279664}
   enemyChecker: {fileID: 4473273841372872220}
   bossRoom: 0
-  enemyRoom: 0
-  once: 0
   doorList:
   - {fileID: 2277373469884123571}
 --- !u!1 &5476364206784868229
@@ -2880,7 +2878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8356437834586912482, guid: 88b248787edfd3a41b19045d4d4e8145, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.25
+      value: 16.2
       objectReference: {fileID: 0}
     - target: {fileID: 8356437834586912482, guid: 88b248787edfd3a41b19045d4d4e8145, type: 3}
       propertyPath: m_LocalRotation.w

@@ -1,20 +1,25 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMove : MonoBehaviour
 {
     private Camera cam;
     private Rigidbody rb;
-    public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, airMulti, slamSpeed;
-    public bool grounded, crouching, sideStepped;
+    public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, airMulti, slamSpeed, stepCounter;
+    private float extraJumpHeight = 0;
+    public bool grounded, crouching, sideStepped, hasControl;
 
     private void Start()
     {
         cam = Camera.main;
+        stepCounter = 1;
         rb = GetComponent<Rigidbody>();
+        hasControl = true;
     }
     public void OnTriggerEnter(Collider other)
     {
+        //Checks for colliding with the "EnemyChecker" to see if a fight needs to be executed
         if (other.gameObject.tag == "EnemyChecker")
         {
             EnemyCheckerScript _enemyCheckerScript = other.gameObject.GetComponent<EnemyCheckerScript>();
@@ -30,6 +35,7 @@ public class PlayerMove : MonoBehaviour
 
     void UserInput()
     {
+        //Allows for player movement relative to where the camera is looking
         float xMove = Input.GetAxisRaw("Horizontal");
         float zMove = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(xMove, 0, zMove).normalized;
@@ -45,7 +51,7 @@ public class PlayerMove : MonoBehaviour
 
                 if (mag.magnitude > moveSpeed)
                 {
-                    rb.velocity = new Vector3(rb.velocity.x / 1.03f, rb.velocity.y, rb.velocity.z / 1.03f);
+                    rb.velocity = new Vector3(rb.velocity.x / slowdownMulti, rb.velocity.y, rb.velocity.z / slowdownMulti);
                 }
             }
 
@@ -60,7 +66,7 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x / slowdownMulti, rb.velocity.y, rb.velocity.z / slowdownMulti);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && grounded && !sideStepped && !crouching)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !sideStepped && !crouching && !grounded)
         {
             Vector3 _moveDir = CalcUserUnput(direction);
             Sidestep(_moveDir);
@@ -79,6 +85,7 @@ public class PlayerMove : MonoBehaviour
     {
         RaycastHit hit;
 
+        //Checks for if the player is on the ground so they can jump etc.
         if (Physics.SphereCast(transform.position, 0.5f, Vector3.down, out hit, 0.71f))
         {
             grounded = true;
@@ -93,59 +100,37 @@ public class PlayerMove : MonoBehaviour
     {
         if (!grounded)
         {
-            slowdownMulti = 1.01f;
-        }
-        else
-        {
-            slowdownMulti = 1.18f;
+            slowdownMulti = 1.03f;
         }
 
+        else if (grounded)
+        {
+            slowdownMulti = Mathf.Lerp(slowdownMulti, 1.18f, 0.01f);
+        }
+
+        //Allows for the player to jump (v:jumpForce, v:grounded)
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             grounded = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(0, jumpForce, 0);
+            rb.AddForce(0, jumpForce + extraJumpHeight, 0);
         }
     }
 
     void Sidestep(Vector3 direction)
     {
+        //A quick movement (v:sideStepForce) in the direction the player is moving with a short cooldown (v:sideStepCooldown)
         Vector3 sideStepForceVec = new Vector3(sideStepForce * direction.x, 0, sideStepForce * direction.z);
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            sideStepped = true;
-            StartCoroutine("SidestepCooldown", sideStepCooldown);
-            rb.AddForce(sideStepForceVec);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            sideStepped = true;
-            StartCoroutine("SidestepCooldown", sideStepCooldown);
-            rb.AddForce(sideStepForceVec);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            sideStepped = true;
-            StartCoroutine("SidestepCooldown", sideStepCooldown);
-            rb.AddForce(sideStepForceVec);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            sideStepped = true;
-            StartCoroutine("SidestepCooldown", sideStepCooldown);
-            rb.AddForce(sideStepForceVec);
-        }
+        sideStepped = true;
+        StartCoroutine("SidestepCooldown", sideStepCooldown);
+        rb.AddForce(sideStepForceVec);
     }
 
     void Crouching()
     {
         if (!grounded)
         {
-            //Uncrouches the player while they are airborne
+            //Uncrouches the player while they are airborne (v:crouching)
             if (crouching)
             {
                 crouching = false;
@@ -181,18 +166,38 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (!hasControl)
+        {
+            return;
+        }
+
+        if (sideStepped && stepCounter <= 1)
+        {
+            stepCounter += (1 / sideStepCooldown) * Time.deltaTime;
+        }
+
         Jumping();
         Crouching();
         CheckGrounded();
     }
 
+    public float returnStepCounter()
+    {
+        return stepCounter;
+    }
+
     void LateUpdate()
     {
+        if (!hasControl)
+        {
+            return;
+        }
         UserInput();
     }
 
     IEnumerator SidestepCooldown(float m_sidestepCooldown)
     {
+        stepCounter = 0;
         yield return new WaitForSeconds(m_sidestepCooldown);
         sideStepped = false;
     }

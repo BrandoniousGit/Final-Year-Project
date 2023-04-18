@@ -20,6 +20,7 @@ public class EnemyAgent : MonoBehaviour
     void Awake()
     {
         m_alive = true;
+        OnSpawnEvents();
         m_currentHP = enemyData.m_maxHP;
         _healthBarImage.fillAmount = 1;
     }
@@ -32,11 +33,22 @@ public class EnemyAgent : MonoBehaviour
         //enemyCanvas.transform.localEulerAngles += new Vector3(0, 180, 0);
         if (m_currentHP <= 0)
         {
+            OnDeadEvents();
             gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             enemyCanvas.SetActive(false);
             m_alive = false;
             StartCoroutine("EnemyDie");
         }
+    }
+
+    public void OnSpawnEvents()
+    {
+
+    }
+
+    public void OnDeadEvents()
+    {
+        
     }
 
     public bool IsAlive()
@@ -50,7 +62,7 @@ public class EnemyAgent : MonoBehaviour
         _healthBarValue.text = string.Format("{0}\n{1} / {2}", enemyData.name, Mathf.Round(m_currentHP), enemyData.m_maxHP);
     }
 
-public void TakeDamage(float damageTaken)
+    public void TakeDamage(float damageTaken)
     {
         m_currentHP -= damageTaken;
         UpdateHealthBar();

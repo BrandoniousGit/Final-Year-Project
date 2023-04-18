@@ -7,12 +7,15 @@ public class RoomList : MonoBehaviour
     public List<GameObject> rooms;
     public List<GameObject> endRooms;
 
-    public GameObject _player, _canvas, bossKey, chest, bossRoomObject;
+    public GameObject _player, _canvas, bossKey, chest, bossRoomObject, playerSpawnPoint;
+    private int keyRoom, chestRoom;
+
+    private bool keySpawned, chestSpawned;
 
     private int maxRooms;
     private int minRooms;
     public int roomCount, endRoomCount;
-    public bool levelReady;
+    public bool levelReady, once;
 
     private GameObject firstSpawn;
 
@@ -20,9 +23,6 @@ public class RoomList : MonoBehaviour
 
     private void Start()
     {
-        maxRooms = levelEnvironment.m_maxTiles;
-        minRooms = levelEnvironment.m_minTiles;
-
         DontDestroyOnLoad(this);
         firstSpawn = GameObject.FindGameObjectWithTag("FirstSpawnPoint");
         levelReady = false;
@@ -33,6 +33,13 @@ public class RoomList : MonoBehaviour
     public void Awake()
     {
         _levelManager = GameObject.FindGameObjectWithTag("LevelManager");
+        if (levelEnvironment == null)
+        {
+            levelEnvironment = _levelManager.GetComponent<LevelManager>().GetCurrentEnvironment();
+        }
+
+        maxRooms = levelEnvironment.m_maxTiles;
+        minRooms = levelEnvironment.m_minTiles;
     }
 
     void CheckRoomCount()
@@ -50,13 +57,14 @@ public class RoomList : MonoBehaviour
 
         else
         {
+            //Selecting boss room and collectable rooms
             int bossRoom = Random.Range(0, endRoomCount - 1);
 
             endRooms[bossRoom].GetComponent<LG_Add>().SetBossRoom();
 
-            int keyRoom = Random.Range(1, roomCount - 1);
+            keyRoom = Random.Range(1, roomCount - 1);
 
-            int chestRoom = Random.Range(1, roomCount - 1);
+            chestRoom = Random.Range(1, roomCount - 1);
 
             while (rooms[keyRoom].GetComponent<LG_Add>().bossDoor)
             {
@@ -67,9 +75,6 @@ public class RoomList : MonoBehaviour
             {
                 chestRoom = Random.Range(1, roomCount - 1);
             }
-
-            Instantiate(bossKey, rooms[keyRoom].transform.position + new Vector3(0, 3, 0), rooms[keyRoom].transform.rotation);
-            Instantiate(chest, rooms[chestRoom].transform.position + new Vector3(0, 1.5f, 0), rooms[chestRoom].transform.rotation);
 
             levelReady = true;
             _levelManager.GetComponent<LevelManager>().SetLevelIsReady(true);
@@ -99,8 +104,42 @@ public class RoomList : MonoBehaviour
     {
         if (!levelReady)
         {
+            //Updates the room counts
             roomCount = rooms.Count;
             endRoomCount = endRooms.Count;
+            return;
+        }
+
+        if (levelReady && !once)
+        {
+            //Once the level is ready, the player and canvas are instantiated
+            Instantiate(_canvas, transform.position, transform.rotation);
+            Instantiate(_player, new Vector3(0.25f, 2.3f, 8.0f), transform.rotation);
+            once = true;
+        }
+
+        //Adds the key to the level, invisible if the room it's in has enemies
+        if (rooms[keyRoom].GetComponent<LG_Add>().enemyChecker.GetComponent<EnemyCheckerScript>().fightFinished && !keySpawned)
+        {
+            Instantiate(bossKey, rooms[keyRoom].transform.position + new Vector3(0, 3, 0), rooms[keyRoom].transform.rotation);
+            keySpawned = true;
+        }
+        else if (!rooms[keyRoom].GetComponent<LG_Add>().enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom && !keySpawned)
+        {
+            Instantiate(bossKey, rooms[keyRoom].transform.position + new Vector3(0, 3, 0), rooms[keyRoom].transform.rotation);
+            keySpawned = true;
+        }
+
+        //Adds the chest to the level, invisible if the room it's in has enemies
+        if (rooms[chestRoom].GetComponent<LG_Add>().enemyChecker.GetComponent<EnemyCheckerScript>().fightFinished && !chestSpawned)
+        {
+            Instantiate(chest, rooms[chestRoom].transform.position + new Vector3(0, 1, 0), rooms[chestRoom].transform.rotation);
+            chestSpawned = true;
+        }
+        else if (!rooms[chestRoom].GetComponent<LG_Add>().enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom && !chestSpawned)
+        {
+            Instantiate(chest, rooms[chestRoom].transform.position + new Vector3(0, 1, 0), rooms[chestRoom].transform.rotation);
+            chestSpawned = true;
         }
     }
 }

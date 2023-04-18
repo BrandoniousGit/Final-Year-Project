@@ -42,13 +42,6 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
-    public void BackButton()
-    {
-        mainCanvas.SetActive(true);
-        weaponCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
-    }
-
     public void StartButton()
     {
         CanvasList[canvasIndex].SetActive(false);

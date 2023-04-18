@@ -19,6 +19,7 @@ public class WeaponSelect : MonoBehaviour
         {
             if (weapon.m_invSlot == 0)
             {
+                //List of primary weapons
                 GameObject clone;
                 clone = Instantiate(weaponSelectClone, primWeapons.transform);
                 clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
@@ -32,6 +33,7 @@ public class WeaponSelect : MonoBehaviour
             }
             if (weapon.m_invSlot == 1)
             {
+                //List of secondary weapons
                 GameObject clone;
                 clone = Instantiate(weaponSelectClone, secWeapons.transform);
                 clone.GetComponentInChildren<TextMeshProUGUI>().text = weapon.m_gunName;
@@ -50,6 +52,7 @@ public class WeaponSelect : MonoBehaviour
     {
         switch(weaponSlot)
         {
+            //Text in the menu for weapon stats and information
             case 0:
                 weaponsManager.GetComponent<WeaponsManager>().primaryWeapon = weapon;
                 currentSelPrim.text = string.Format("{0}", weapon.m_gunName);

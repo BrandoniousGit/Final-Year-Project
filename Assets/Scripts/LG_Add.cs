@@ -12,6 +12,7 @@ public class LG_Add : MonoBehaviour
 
     void Awake()
     {
+        //Finding the LG_Tiles to get access to the Room List
         _roomList = GameObject.FindGameObjectWithTag("LG_Tiles").GetComponent<RoomList>();
         _roomList.rooms.Add(gameObject);
 
@@ -28,6 +29,7 @@ public class LG_Add : MonoBehaviour
 
     public void SetBossRoom()
     {
+        //Sets the room to the boss room
         bossRoom = true;
     }
 
@@ -45,6 +47,7 @@ public class LG_Add : MonoBehaviour
 
         if (_roomList.levelReady)
         {
+            //If the level is started and the player enters an enemy room, the walls go up and a fight starts
             if (enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom)
             {
                 if (enemyChecker.GetComponent<EnemyCheckerScript>().playerEnteredRoom && !enemyChecker.GetComponent<EnemyCheckerScript>().fightFinished)

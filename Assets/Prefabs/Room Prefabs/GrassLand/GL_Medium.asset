@@ -23,6 +23,8 @@ MonoBehaviour:
   - {fileID: 836704410672486230, guid: 81e75795877a45e4ba886cc98b318a8a, type: 3}
   cTiles:
   - {fileID: 5460155077721692743, guid: 65f024e7bd029e84ba2863f9b5e5f652, type: 3}
+  bossTile:
+  - {fileID: 0}
   m_minTiles: 10
   m_maxTiles: 20
   m_iChance: 20

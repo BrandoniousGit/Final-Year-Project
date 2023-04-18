@@ -32,7 +32,7 @@ public class EnemyCheckerScript : MonoBehaviour
             {
                 Instantiate(agents[0]);
             }*/
-            aliveEnemies.Add(Instantiate(agents[1], transform.position, transform.rotation));
+            aliveEnemies.Add(Instantiate(agents[Random.Range(0, 2)], transform.position, transform.rotation));
             once = true;
         }
 

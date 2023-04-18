@@ -30,8 +30,6 @@ public class GunScript : MonoBehaviour
 
     private void Awake()
     {
-        cam = Camera.main;
-
         if (GameObject.FindGameObjectWithTag("WeaponManager") != null)
         {
             weaponManager = GameObject.FindGameObjectWithTag("WeaponManager");
@@ -62,6 +60,15 @@ public class GunScript : MonoBehaviour
 
     private void Update()
     {
+        if (cam == null)
+        {
+            if (GameObject.FindGameObjectWithTag("MainCamera") == null)
+            {
+                return;
+            }
+            cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        }
+
         //Shooting
         if (!reloading && CheckAmmo() && canShoot)
         {
@@ -196,7 +203,7 @@ public class GunScript : MonoBehaviour
 
                 Vector3 RandomVec = new Vector3(randomX, randomY, randomZ);
 
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
                 {
                     WhatDidIHit(hit);
 
@@ -217,7 +224,7 @@ public class GunScript : MonoBehaviour
         //Checking for any other hitscan weapons
         else
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
             {
                 WhatDidIHit(hit);
 
