@@ -290,6 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7884111171137076039}
   - component: {fileID: 7884111171122278375}
+  - component: {fileID: 4430684004132399995}
   m_Layer: 0
   m_Name: MediumTree
   m_TagString: Untagged
@@ -305,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7884111171137562471}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 8.86, y: 1.0109634, z: -6.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -342,3 +343,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7884111171139500451}
   m_Enabled: 1
+--- !u!208 &4430684004132399995
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884111171137562471}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.075, y: 0.5, z: 0.075}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

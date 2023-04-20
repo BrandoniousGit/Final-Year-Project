@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6665ca60eddb39e439566f9cb08b50e9, type: 3}
   m_Name: Flying Thing
   m_EditorClassIdentifier: 
-  m_model: {fileID: 332591297717074679, guid: dbac96fd8989b174b8cc54b1665143bb, type: 3}
+  m_model: {fileID: 6648944936253035403, guid: d4aa1c6a4c5672543a05b4081234828d, type: 3}
+  m_projectile: {fileID: 0}
+  m_enemyId: 1
   m_maxHP: 90
   m_damage: 5
   m_moveSpeed: 1

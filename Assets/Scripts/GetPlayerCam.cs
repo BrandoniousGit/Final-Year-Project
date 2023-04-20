@@ -21,7 +21,8 @@ public class GetPlayerCam : MonoBehaviour
             playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>();
         }
 
-        sidestepBar.fillAmount = playerScript.returnStepCounter();
+        sidestepBar.fillAmount = playerScript.ReturnStepCounter();
+        healthBar.fillAmount = playerScript.ReturnHealth() / playerScript.ReturnMaxHealth();
 
         //Finds the player's camera and to get access to it
         if (gameObject.GetComponent<Canvas>().worldCamera == null)

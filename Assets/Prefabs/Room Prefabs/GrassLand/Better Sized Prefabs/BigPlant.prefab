@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7051466990196635415}
   - component: {fileID: 7051466990215422903}
+  - component: {fileID: 87303741983623018}
   m_Layer: 0
   m_Name: BigPlant
   m_TagString: Untagged
@@ -353,3 +354,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7051466990199059955}
   m_Enabled: 1
+--- !u!208 &87303741983623018
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7051466990197123895}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.155, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.09, y: 0.15, z: 0.09}
+  m_TimeToStationary: 0.5

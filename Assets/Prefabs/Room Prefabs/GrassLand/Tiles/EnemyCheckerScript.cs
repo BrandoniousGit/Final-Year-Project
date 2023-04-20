@@ -28,17 +28,18 @@ public class EnemyCheckerScript : MonoBehaviour
     {
         if (!once && playerEnteredRoom && levelManager.IsLevelReady() && isEnemyRoom)
         {
-            /*for (int i = 0; i < Random.Range(2,4); i++)
+            for (int i = 0; i < Random.Range(2, 3); i++)
             {
-                Instantiate(agents[0]);
-            }*/
-            aliveEnemies.Add(Instantiate(agents[Random.Range(0, 2)], transform.position, transform.rotation));
+                float randomX = Random.Range(-10.0f, 10.0f);
+                float randomZ = Random.Range(-10.0f, 10.0f);
+                aliveEnemies.Add(Instantiate(agents[Random.Range(0, 2)], new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ), transform.rotation));
+            }
             once = true;
         }
 
         for (int i = 0; i < aliveEnemies.Count; i++)
         {
-            if (!aliveEnemies[i].GetComponent<EnemyAgent>().IsAlive())
+            if (!aliveEnemies[i].GetComponentInChildren<EnemyAgent>().IsAlive())
             {
                 aliveEnemies.RemoveAt(i);
             }

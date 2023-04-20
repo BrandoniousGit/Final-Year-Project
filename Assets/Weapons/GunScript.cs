@@ -22,6 +22,8 @@ public class GunScript : MonoBehaviour
 
     private Camera cam;
 
+    public LayerMask hitLayers;
+
     private void GunInitialise(GunObject currentWeapon)
     {
         clipSize = currentWeapon.m_clipSize;
@@ -203,7 +205,7 @@ public class GunScript : MonoBehaviour
 
                 Vector3 RandomVec = new Vector3(randomX, randomY, randomZ);
 
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
                 {
                     WhatDidIHit(hit);
 
@@ -224,7 +226,7 @@ public class GunScript : MonoBehaviour
         //Checking for any other hitscan weapons
         else
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
             {
                 WhatDidIHit(hit);
 
@@ -251,19 +253,14 @@ public class GunScript : MonoBehaviour
 
     void WhatDidIHit(RaycastHit _hit)
     {
-        EnemyAgent hitEnemyScript;
-
-        switch (_hit.transform.gameObject.tag)
+        if (_hit.transform.gameObject.GetComponent<EnemyAgent>() == null)
         {
-            case "Enemy":
-                hitEnemyScript = _hit.transform.GetComponent<EnemyAgent>();
-                hitEnemyScript.TakeDamage(damage);
-                Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal), _hit.transform);
-                break;
-            default:
-                Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
-                break;
+            Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
+            return;
         }
+
+        Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
+        _hit.transform.gameObject.GetComponent<EnemyAgent>().TakeDamage(damage);
     }
 
     public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)

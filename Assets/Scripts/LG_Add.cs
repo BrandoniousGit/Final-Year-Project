@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LG_Add : MonoBehaviour
 {
     private RoomList _roomList;
     public GameObject bossDoor, enemyChecker;
-    public bool bossRoom;
+    public bool bossRoom, once;
     public List<GameObject> doorList;
 
     void Awake()
@@ -25,6 +26,8 @@ public class LG_Add : MonoBehaviour
         {
             enemyChecker.GetComponent<EnemyCheckerScript>().isEnemyRoom = true;
         }
+
+        once = false;
     }
 
     public void SetBossRoom()

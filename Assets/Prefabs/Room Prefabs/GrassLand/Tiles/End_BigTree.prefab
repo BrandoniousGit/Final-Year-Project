@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 836704410672486228}
   - component: {fileID: 836704410672486231}
   - component: {fileID: 8445258876741114663}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: End_BigTree
   m_TagString: EndTile
   m_Icon: {fileID: 0}
@@ -371,6 +371,7 @@ MonoBehaviour:
   bossDoor: {fileID: 3137177861315531370}
   enemyChecker: {fileID: 1134530691034991182}
   bossRoom: 0
+  once: 0
   doorList:
   - {fileID: 3858100652268182211}
 --- !u!1 &3858100652268182211
@@ -484,6 +485,7 @@ GameObject:
   - component: {fileID: 2518562222339488124}
   - component: {fileID: 3494992287671001902}
   - component: {fileID: 1202865673473472717}
+  - component: {fileID: 3372362748536132762}
   m_Layer: 0
   m_Name: Wall (3)
   m_TagString: Untagged
@@ -814,6 +816,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &3372362748536132762
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307660989560057086}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 16, y: 2.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7335688085801461041
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +846,7 @@ GameObject:
   - component: {fileID: 7335688085801461045}
   - component: {fileID: 7335688085801461044}
   - component: {fileID: 7335688085801461043}
+  - component: {fileID: 6275548245028519043}
   m_Layer: 0
   m_Name: Wall (2)
   m_TagString: Untagged
@@ -1158,6 +1177,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &6275548245028519043
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335688085801461041}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 16, y: 2.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7335688086295849139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1207,7 @@ GameObject:
   - component: {fileID: 7335688086295849143}
   - component: {fileID: 7335688086295849142}
   - component: {fileID: 7335688086295849137}
+  - component: {fileID: 1374393167084712327}
   m_Layer: 0
   m_Name: Wall (1)
   m_TagString: Untagged
@@ -1502,6 +1538,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &1374393167084712327
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335688086295849139}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 16, y: 2.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8554292284826430015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1568,7 @@ GameObject:
   - component: {fileID: 6985571712722612886}
   - component: {fileID: 6876108001140908461}
   - component: {fileID: 2319091997584726375}
+  - component: {fileID: 1078455164680630331}
   m_Layer: 0
   m_Name: Walls with hole
   m_TagString: Untagged
@@ -2268,6 +2321,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &1078455164680630331
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554292284826430015}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.5, z: 16}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -10}
+  m_TimeToStationary: 0.5
 --- !u!1001 &692016472012708702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2421,7 +2490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.z

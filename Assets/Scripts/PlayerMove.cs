@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, airMulti, slamSpeed, stepCounter;
     private float extraJumpHeight = 0;
     public bool grounded, crouching, sideStepped, hasControl;
+    public float currentHealth, maxHealth;
 
     private void Start()
     {
@@ -16,7 +17,10 @@ public class PlayerMove : MonoBehaviour
         stepCounter = 1;
         rb = GetComponent<Rigidbody>();
         hasControl = true;
+        currentHealth = 100;
+        maxHealth = currentHealth;
     }
+
     public void OnTriggerEnter(Collider other)
     {
         //Checks for colliding with the "EnemyChecker" to see if a fight needs to be executed
@@ -164,6 +168,21 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float incomingDamage)
+    {
+        currentHealth -= incomingDamage;
+    }
+
+    public float ReturnMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float ReturnHealth()
+    {
+        return currentHealth;
+    }
+
     void Update()
     {
         if (!hasControl)
@@ -181,7 +200,7 @@ public class PlayerMove : MonoBehaviour
         CheckGrounded();
     }
 
-    public float returnStepCounter()
+    public float ReturnStepCounter()
     {
         return stepCounter;
     }

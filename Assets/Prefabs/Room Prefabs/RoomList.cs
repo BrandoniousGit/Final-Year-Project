@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomList : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class RoomList : MonoBehaviour
 
     private GameObject _levelManager;
 
+    private NavMeshSurface navMesh;
+
     private void Start()
     {
         DontDestroyOnLoad(this);
+        navMesh = GetComponent<NavMeshSurface>();
         firstSpawn = GameObject.FindGameObjectWithTag("FirstSpawnPoint");
         levelReady = false;
         //First check for if the level is big enough/too big after 2.0s
@@ -100,6 +104,11 @@ public class RoomList : MonoBehaviour
         Invoke(nameof(CheckRoomCount), 1.5f);
     }
 
+    public NavMeshSurface GetNavMesh()
+    {
+        return navMesh;
+    }
+
     private void Update()
     {
         if (!levelReady)
@@ -115,6 +124,7 @@ public class RoomList : MonoBehaviour
             //Once the level is ready, the player and canvas are instantiated
             Instantiate(_canvas, transform.position, transform.rotation);
             Instantiate(_player, new Vector3(0.25f, 2.3f, 8.0f), transform.rotation);
+            navMesh.BuildNavMesh();
             once = true;
         }
 

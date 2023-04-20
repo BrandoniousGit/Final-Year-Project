@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2296275961415796331}
   - component: {fileID: 2324817760507762000}
   - component: {fileID: 6845664150108056986}
+  - component: {fileID: 5166206239918863507}
   m_Layer: 0
   m_Name: Walls with hole (1)
   m_TagString: Untagged
@@ -842,6 +843,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &5166206239918863507
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691668846039113410}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.5, z: 16}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -10}
+  m_TimeToStationary: 0.5
 --- !u!1 &691668846426786397
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +873,7 @@ GameObject:
   - component: {fileID: 2296275961799348980}
   - component: {fileID: 2324817760895435215}
   - component: {fileID: 6845664150496327941}
+  - component: {fileID: 2545332031081684138}
   m_Layer: 0
   m_Name: Walls with hole (3)
   m_TagString: Untagged
@@ -1608,6 +1626,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &2545332031081684138
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691668846426786397}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.5, z: 16}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -10}
+  m_TimeToStationary: 0.5
 --- !u!1 &691668847151569261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1656,7 @@ GameObject:
   - component: {fileID: 2296275962658341316}
   - component: {fileID: 2324817762148700927}
   - component: {fileID: 6845664149593188917}
+  - component: {fileID: 4910167510656925165}
   m_Layer: 0
   m_Name: Walls with hole (2)
   m_TagString: Untagged
@@ -2374,6 +2409,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &4910167510656925165
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691668847151569261}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.5, z: 16}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -10}
+  m_TimeToStationary: 0.5
 --- !u!1 &990294735635569745
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,6 +4035,7 @@ GameObject:
   - component: {fileID: 4827102089966281860}
   - component: {fileID: 9034260963240245183}
   - component: {fileID: 154215657336491893}
+  - component: {fileID: 8197799202725254184}
   m_Layer: 0
   m_Name: Walls with hole
   m_TagString: Untagged
@@ -4736,6 +4788,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!208 &8197799202725254184
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6105192459918441517}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 2.5, z: 16}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -10}
+  m_TimeToStationary: 0.5
 --- !u!1 &7535936097376228205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4989,7 +5057,7 @@ GameObject:
   - component: {fileID: 8672791428213653677}
   - component: {fileID: 8672791428213653676}
   - component: {fileID: 8691921315543599598}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5004,7 +5072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8672791428213653675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5385,7 +5453,6 @@ MonoBehaviour:
   bossDoor: {fileID: 0}
   enemyChecker: {fileID: 5209326693033855056}
   bossRoom: 0
-  enemyRoom: 0
   once: 0
   doorList:
   - {fileID: 990294735635569745}
@@ -5483,7 +5550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.z

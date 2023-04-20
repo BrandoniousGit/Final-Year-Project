@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5710689334777746705}
   - component: {fileID: 5710689334797320625}
+  - component: {fileID: 8504178407585657167}
   m_Layer: 0
   m_Name: BiggerPlant
   m_TagString: Untagged
@@ -62,6 +63,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5710689334780172277}
   m_Enabled: 1
+--- !u!208 &8504178407585657167
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710689334777973041}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.185, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.07, y: 0.16, z: 0.08}
+  m_TimeToStationary: 0.5
 --- !u!1 &5710689334777973043
 GameObject:
   m_ObjectHideFlags: 0

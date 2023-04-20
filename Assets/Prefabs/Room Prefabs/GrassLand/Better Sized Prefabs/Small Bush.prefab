@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5029619274564697681}
   - component: {fileID: 5029619274547473137}
+  - component: {fileID: 1962621047870104957}
   m_Layer: 0
   m_Name: Small Bush
   m_TagString: Untagged
@@ -62,6 +63,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5029619274562927797}
   m_Enabled: 1
+--- !u!208 &1962621047870104957
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029619274564854385}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.2, y: 0.2, z: 0.215}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.15, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5029619274564854387
 GameObject:
   m_ObjectHideFlags: 0

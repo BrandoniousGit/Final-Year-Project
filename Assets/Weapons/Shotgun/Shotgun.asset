@@ -18,7 +18,7 @@ MonoBehaviour:
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
   m_gunType: 3
   m_gunName: Shotgun
-  m_gunDescription: Standard 6 Pellet Shotgun
+  m_gunDescription: 6 Pellet Shotgun
   m_invSlot: 1
   m_ammoInClip: 6
   m_clipSize: 6

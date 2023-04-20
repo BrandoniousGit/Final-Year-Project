@@ -26,6 +26,7 @@ TagManager:
   - SpawnRoom
   - EnemyManager
   - InteractionText
+  - NavMesh
   layers:
   - Default
   - TransparentFX
@@ -33,11 +34,11 @@ TagManager:
   - 
   - Water
   - UI
-  - PlayerIgnore
+  - Player
   - Weapon
   - Projectile
-  - 
-  - 
+  - Ground
+  - Enemy
   - 
   - 
   - 
