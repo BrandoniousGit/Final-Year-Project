@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Flying Thing
   m_EditorClassIdentifier: 
   m_model: {fileID: 6648944936253035403, guid: d4aa1c6a4c5672543a05b4081234828d, type: 3}
-  m_projectile: {fileID: 0}
+  m_projectile: {fileID: 3946180493949030826, guid: 847f6f99c336a8b43aeda3b38fda4878, type: 3}
+  m_attackOffset: {x: 0, y: 5, z: 0}
   m_enemyId: 1
   m_maxHP: 90
   m_damage: 5

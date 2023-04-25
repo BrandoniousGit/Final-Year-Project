@@ -355,8 +355,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 6648944936253035403}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
-  m_Speed: 1.5
+  m_Radius: 0.3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -487,6 +487,7 @@ MonoBehaviour:
   _healthBarImage: {fileID: 4145737805020161543}
   _healthBarValue: {fileID: 2165817860001120361}
   enemyCanvas: {fileID: 1670026967391135622}
+  parent: {fileID: 6648944936253035403}
   agent: {fileID: 1189443580472394735}
   heightOffset: {x: 0, y: 10, z: 0}
   m_currentHP: 0
@@ -495,9 +496,9 @@ MonoBehaviour:
   playerInAttackRange: 0
   sightRange: 50
   playerInSightRange: 0
-  timeBetweenAttacks: 0
+  timeBetweenAttacks: 5
   canAttack: 0
-  shotForce: 0
+  shotForce: 4000
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

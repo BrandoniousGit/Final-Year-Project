@@ -8,6 +8,7 @@ public class EnemyData : ScriptableObject
 {
     public GameObject m_model;
     public GameObject m_projectile;
+    public Vector3 m_attackOffset;
 
     public uint m_enemyId;
 

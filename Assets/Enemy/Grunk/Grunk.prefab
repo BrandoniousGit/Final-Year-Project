@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1872981916429284951}
   - component: {fileID: 1872981916429284950}
   - component: {fileID: 335392959221484125}
-  - component: {fileID: 3299606992123373384}
+  - component: {fileID: 1697401217841885991}
   m_Layer: 10
   m_Name: Grunk Body
   m_TagString: Enemy
@@ -354,7 +354,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &3299606992123373384
+--- !u!114 &1697401217841885991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,13 +370,14 @@ MonoBehaviour:
   _healthBarImage: {fileID: 7507050878865238067}
   _healthBarValue: {fileID: 2429995094878147931}
   enemyCanvas: {fileID: 1763875636975473535}
+  parent: {fileID: 6332239942888153607}
   agent: {fileID: 534196708324995}
   heightOffset: {x: 0, y: 0, z: 0}
   m_currentHP: 0
   m_alive: 0
-  attackRange: 8
+  attackRange: 7
   playerInAttackRange: 0
-  sightRange: 12
+  sightRange: 15
   playerInSightRange: 0
   timeBetweenAttacks: 3
   canAttack: 0

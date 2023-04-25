@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb1709601f90f346ae730419ac0a266, type: 3}
+  m_Name: Dungeon
+  m_EditorClassIdentifier: 
+  iTiles: []
+  tTiles: []
+  hTiles: []
+  eTiles:
+  - {fileID: 5356902556098981747, guid: a44337af30c4b3d4d8d2cf9a8cdb9c94, type: 3}
+  cTiles: []
+  bossTile: []
+  m_minTiles: 10
+  m_maxTiles: 20
+  m_iChance: 30
+  m_tChance: 0
+  m_hChance: 0
+  m_eChance: 40
+  m_cChance: 30

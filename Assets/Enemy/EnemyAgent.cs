@@ -5,14 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
 public class EnemyAgent : MonoBehaviour
 {
     public EnemyData enemyData;
     public Image _healthBarImage;
     public TextMeshProUGUI _healthBarValue;
-    public GameObject enemyCanvas;
+    public GameObject enemyCanvas, parent;
 
     private GameObject player;
     public NavMeshAgent agent;
@@ -104,22 +102,13 @@ public class EnemyAgent : MonoBehaviour
             return;
         }
 
-        switch (enemyData.m_enemyId)
-        {
-            case 0:
-                //Grunk attack
-                GameObject grunkProj = Instantiate(enemyData.m_projectile, transform.position, transform.rotation);
-                grunkProj.GetComponent<Rigidbody>().AddForce((player.transform.position - transform.position).normalized * shotForce);
-                Destroy(grunkProj, 3);
-                StartCoroutine("WaitToAttack", timeBetweenAttacks);
-                break;
-            case 1:
-                //Flying thing
-                StartCoroutine("WaitToAttack", timeBetweenAttacks);
-                break;
-        }
+        GameObject _proj = Instantiate(enemyData.m_projectile, transform.position, transform.rotation);
+        _proj.GetComponent<Rigidbody>().AddForce((player.transform.position + enemyData.m_attackOffset - transform.position).normalized * shotForce);
+        _proj.GetComponent<ProjectileHit>();
+        Destroy(_proj, 3);
+        StartCoroutine("WaitToAttack", timeBetweenAttacks);
     }
-
+    
     public void OnSpawnEvents()
     {
 
@@ -157,6 +146,6 @@ public class EnemyAgent : MonoBehaviour
     IEnumerator EnemyDie()
     {
         yield return new WaitForSeconds(0.2f);
-        Destroy(gameObject);
+        Destroy(parent.gameObject);
     }
 }
