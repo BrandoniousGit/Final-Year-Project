@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        SetEnvironmentByID(1);
+        SetEnvironmentByID(eList.environmentToUse);
         DontDestroyOnLoad(this);
     }
 }

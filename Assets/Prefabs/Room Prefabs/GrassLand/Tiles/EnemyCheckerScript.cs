@@ -28,7 +28,7 @@ public class EnemyCheckerScript : MonoBehaviour
     {
         if (!once && playerEnteredRoom && levelManager.IsLevelReady() && isEnemyRoom)
         {
-            for (int i = 0; i < Random.Range(2, 3); i++)
+            for (int i = 0; i < Random.Range(2, 5); i++)
             {
                 float randomX = Random.Range(-10.0f, 10.0f);
                 float randomZ = Random.Range(-10.0f, 10.0f);

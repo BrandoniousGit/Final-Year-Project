@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class EnvironmentList : MonoBehaviour
 {
+    public int environmentToUse;
     public List<Environment> environmentList;
 }

@@ -21,6 +21,7 @@ public class ProjectileHit : MonoBehaviour
         {
             if (Physics.CheckSphere(transform.position, explosiveRange, playerLayer, QueryTriggerInteraction.Ignore))
             {
+                Debug.Log("Player Detected");
                 player.gameObject.GetComponent<PlayerMove>().TakeDamage(explosionDamage);
             }
             Destroy(gameObject);

@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 1468047909603071888}
   - component: {fileID: 1468047909603071889}
   - component: {fileID: 1484943724998844115}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,6 +567,7 @@ MonoBehaviour:
   bossDoor: {fileID: 0}
   enemyChecker: {fileID: 8624374994200712637}
   bossRoom: 0
+  once: 0
   doorList:
   - {fileID: 4062088471744682085}
   - {fileID: 387566658349037747}
@@ -4151,7 +4152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.z

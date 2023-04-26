@@ -192,10 +192,12 @@ public class GunScript : MonoBehaviour
     void CheckRay(GunType gunType)
     {
         weaponMuzzlePos = transform.TransformPoint(FindGameObjectInChildWithTag(gunObject.m_model, "GunFront").transform.position);
+
+        float randomX, randomY, randomZ;
+
         //Checking for if shotgun impacts walls/enemies
         if (gunType == GunType.Shotgun)
         {
-            float randomX, randomY, randomZ;
             for (int i = 0; i < gunObject.m_shotgunPelletCount; i++)
             {
                 //Random Spread
@@ -203,9 +205,9 @@ public class GunScript : MonoBehaviour
                 randomY = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
                 randomZ = Random.Range(-gunObject.m_shotgunSpread, gunObject.m_shotgunSpread);
 
-                Vector3 RandomVec = new Vector3(randomX, randomY, randomZ);
+                Vector3 randomVec = new Vector3(randomX, randomY, randomZ);
 
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + RandomVec, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + randomVec, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
                 {
                     WhatDidIHit(hit);
 
@@ -226,7 +228,14 @@ public class GunScript : MonoBehaviour
         //Checking for any other hitscan weapons
         else
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
+            //Aim Spread
+            randomX = Random.Range(-gunObject.m_aimSpread, gunObject.m_aimSpread);
+            randomY = Random.Range(-gunObject.m_aimSpread, gunObject.m_aimSpread);
+            randomZ = Random.Range(-gunObject.m_aimSpread, gunObject.m_aimSpread);
+
+            Vector3 randomVec = new Vector3(randomX, randomY, randomZ);
+
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward + randomVec, out RaycastHit hit, Mathf.Infinity, hitLayers, QueryTriggerInteraction.Ignore))
             {
                 WhatDidIHit(hit);
 

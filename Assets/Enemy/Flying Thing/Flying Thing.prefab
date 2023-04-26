@@ -356,9 +356,9 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 2
+  m_Speed: 5.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 49
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -492,11 +492,12 @@ MonoBehaviour:
   heightOffset: {x: 0, y: 10, z: 0}
   m_currentHP: 0
   m_alive: 0
-  attackRange: 10
+  attackRange: 50
   playerInAttackRange: 0
   sightRange: 50
   playerInSightRange: 0
-  timeBetweenAttacks: 5
+  timeBetweenAttacksMin: 2.8
+  timeBetweenAttacksMax: 3.2
   canAttack: 0
   shotForce: 4000
   playerLayer:

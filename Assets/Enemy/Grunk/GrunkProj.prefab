@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 42823583293295666}
   - component: {fileID: 3793914659047979945}
   - component: {fileID: 4398914373910980547}
-  - component: {fileID: 2406068580493565223}
   m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2406068580493565223
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634551712047151449}
-  m_Material: {fileID: 13400000, guid: 61bb5795738bc1f4a9eef75b91a5b427, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3742187596627723230
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,8 +250,8 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3742187596627723230}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 13400000, guid: 61bb5795738bc1f4a9eef75b91a5b427, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1
@@ -283,3 +269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 9
+  explosiveRange: 0
+  explosionDamage: 0
+  explosiveShot: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0

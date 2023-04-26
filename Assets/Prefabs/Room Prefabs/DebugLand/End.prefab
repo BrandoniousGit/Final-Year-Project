@@ -1910,7 +1910,7 @@ GameObject:
   - component: {fileID: 6798974957429693570}
   - component: {fileID: 6798974957429693569}
   - component: {fileID: 2375028394911011057}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: End
   m_TagString: EndTile
   m_Icon: {fileID: 0}
@@ -2262,6 +2262,7 @@ MonoBehaviour:
   bossDoor: {fileID: 7667478178536948489}
   enemyChecker: {fileID: 7048138179730925269}
   bossRoom: 0
+  once: 0
   doorList:
   - {fileID: 3226227980330965296}
 --- !u!1001 &2359938562676431216
@@ -2352,7 +2353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.z

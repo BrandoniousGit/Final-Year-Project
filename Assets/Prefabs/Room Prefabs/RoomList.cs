@@ -37,10 +37,8 @@ public class RoomList : MonoBehaviour
     public void Awake()
     {
         _levelManager = GameObject.FindGameObjectWithTag("LevelManager");
-        if (levelEnvironment == null)
-        {
-            levelEnvironment = _levelManager.GetComponent<LevelManager>().GetCurrentEnvironment();
-        }
+
+        levelEnvironment = _levelManager.GetComponent<LevelManager>().GetCurrentEnvironment();
 
         maxRooms = levelEnvironment.m_maxTiles;
         minRooms = levelEnvironment.m_minTiles;

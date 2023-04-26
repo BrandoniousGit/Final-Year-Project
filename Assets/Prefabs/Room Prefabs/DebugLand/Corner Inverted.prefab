@@ -2484,7 +2484,7 @@ GameObject:
   - component: {fileID: 2989757750759062139}
   - component: {fileID: 5963496820373516908}
   - component: {fileID: 3206498499089083624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner Inverted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2838,6 +2838,7 @@ MonoBehaviour:
   bossDoor: {fileID: 0}
   enemyChecker: {fileID: 5322087559533424184}
   bossRoom: 0
+  once: 0
   doorList:
   - {fileID: 7092239362470927530}
   - {fileID: 8752873671442048833}
@@ -2955,7 +2956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2717828904047246468, guid: bf3ffbecd5102fb4b87f718cab8a58df, type: 3}
       propertyPath: m_LocalPosition.z

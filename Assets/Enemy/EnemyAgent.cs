@@ -26,7 +26,7 @@ public class EnemyAgent : MonoBehaviour
     public float sightRange;
     public bool playerInSightRange;
 
-    public float timeBetweenAttacks;
+    public float timeBetweenAttacksMin, timeBetweenAttacksMax;
     public bool canAttack;
     public float shotForce;
 
@@ -61,7 +61,10 @@ public class EnemyAgent : MonoBehaviour
 
         if (!playerInAttackRange && !playerInSightRange)
         {
-            agent.SetDestination(transform.position);
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(transform.position);
+            }
         }
 
         if (!playerInAttackRange && playerInSightRange)
@@ -89,13 +92,19 @@ public class EnemyAgent : MonoBehaviour
 
     public void GetInRangePlayer()
     {
-        agent.SetDestination(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+        if (agent.isOnNavMesh)
+        {
+            agent.SetDestination(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+        }
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
     }
 
     public void AttackPlayer()
     {
-        agent.SetDestination(transform.position);
+        if (agent.isOnNavMesh)
+        {
+            agent.SetDestination(transform.position);
+        }
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
         if (!canAttack)
         {
@@ -106,7 +115,7 @@ public class EnemyAgent : MonoBehaviour
         _proj.GetComponent<Rigidbody>().AddForce((player.transform.position + enemyData.m_attackOffset - transform.position).normalized * shotForce);
         _proj.GetComponent<ProjectileHit>();
         Destroy(_proj, 3);
-        StartCoroutine("WaitToAttack", timeBetweenAttacks);
+        StartCoroutine("WaitToAttack", Random.Range(timeBetweenAttacksMin, timeBetweenAttacksMax));
     }
     
     public void OnSpawnEvents()
