@@ -48,6 +48,15 @@ public class WeaponSelect : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (weaponsManager == null)
+        {
+            Debug.LogWarning("Weapon Manager is Null!");
+            weaponsManager = GameObject.FindGameObjectWithTag("WeaponManager");
+        }
+    }
+
     void AddToWeaponManager(GunObject weapon, int weaponSlot)
     {
         switch(weaponSlot)

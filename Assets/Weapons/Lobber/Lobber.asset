@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3079152dd21b34640b66ef95239ea14e, type: 3}
   m_Name: Lobber
   m_EditorClassIdentifier: 
-  m_model: {fileID: 5828008131436175625, guid: 518336b69609953428303aeec270be56, type: 3}
+  m_model: {fileID: 1411512464560164, guid: 02baef62b1bfedf40bb369fb7542b9e7, type: 3}
   m_projectile: {fileID: 5479779351381918889, guid: e813ebc7e3524cf49bfe43087d0c83fe, type: 3}
   m_bulletTrail: {fileID: 0}
   m_ImpactParticleSystem: {fileID: 0}
@@ -20,12 +20,13 @@ MonoBehaviour:
   m_gunName: Lobber
   m_gunDescription: Lobs Cats
   m_invSlot: 0
-  m_ammoInClip: 2
-  m_clipSize: 6
+  m_ammoInClip: 0
+  m_clipSize: 5
   m_burstCount: 0
   m_shotgunPelletCount: 0
   m_damage: 20
   m_reloadTime: 1.2
-  m_timeBetweenShot: 0.6
+  m_timeBetweenShot: 0.8
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
+  m_aimSpread: 0

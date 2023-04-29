@@ -43,7 +43,9 @@ public class GunScript : MonoBehaviour
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
-            gunObject.m_ammoInClip = clipSize;
+
+            weaponManagerScript.primaryWeapon.m_ammoInClip = weaponManagerScript.primaryWeapon.m_clipSize;
+            weaponManagerScript.secondaryWeapon.m_ammoInClip = weaponManagerScript.secondaryWeapon.m_clipSize;
         }
         else 
         {
@@ -56,7 +58,9 @@ public class GunScript : MonoBehaviour
             SecondaryWeaponClone.SetActive(false);
             gunObject = weaponManagerScript.primaryWeapon;
             GunInitialise(gunObject);
-            gunObject.m_ammoInClip = clipSize;
+
+            weaponManagerScript.primaryWeapon.m_ammoInClip = weaponManagerScript.primaryWeapon.m_clipSize;
+            weaponManagerScript.secondaryWeapon.m_ammoInClip = weaponManagerScript.secondaryWeapon.m_clipSize;
         }
     }
 
@@ -133,6 +137,7 @@ public class GunScript : MonoBehaviour
                 {
                     CheckRay(gunObject.m_gunType);
                     gunObject.m_ammoInClip -= 1;
+                    m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
                 }
                 break;
@@ -161,6 +166,7 @@ public class GunScript : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     gunObject.m_ammoInClip -= 1;
+                    m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("CreateProjectile");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
                 }
@@ -310,9 +316,11 @@ public class GunScript : MonoBehaviour
 
     IEnumerator CreateProjectile()
     {
-        GameObject clone = Instantiate(gunObject.m_projectile, transform.position, transform.rotation);
+        weaponMuzzlePos = transform.TransformPoint(FindGameObjectInChildWithTag(gunObject.m_model, "GunFront").transform.position);
+
+        GameObject clone = Instantiate(gunObject.m_projectile, weaponMuzzlePos, transform.rotation);
         clone.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         Destroy(clone);
     }
 
@@ -325,6 +333,8 @@ public class GunScript : MonoBehaviour
 
     IEnumerator BurstDelay(float time, int count)
     {
+        m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
+
         canShoot = false;
         for (int i = 0; i < count; i++)
         {

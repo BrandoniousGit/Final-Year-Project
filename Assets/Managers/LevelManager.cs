@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,7 +11,18 @@ public class LevelManager : MonoBehaviour
     private bool levelIsReady;
     public Environment currentEnvironment;
     public Environment backupEnvironment;
-    public EnvironmentList eList;
+
+    public int environmentToUse;
+    public List<Environment> environmentList;
+
+    public List<GameObject> enemies;
+
+    private float timer;
+
+    public List<GameObject> GetEnemyList()
+    {
+        return enemies;
+    }
 
     public bool IsLevelReady()
     {
@@ -26,7 +39,7 @@ public class LevelManager : MonoBehaviour
         return hasKey;
     }
 
-    public void SetPlayerHaveKey(bool doThey)
+    public void SetPlayerHasKey(bool doThey)
     {
         hasKey = doThey;
     }
@@ -38,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public void SetEnvironmentByID(int environment)
     {
-        SetEnvironment(eList.environmentList[environment]);
+        SetEnvironment(environmentList[environment]);
     }
 
     public Environment GetCurrentEnvironment()
@@ -52,7 +65,28 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        SetEnvironmentByID(eList.environmentToUse);
+        SetEnvironmentByID(environmentToUse);
         DontDestroyOnLoad(this);
+    }
+
+    private void Update()
+    {
+        if (IsLevelReady())
+        {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                timer = 0;
+            }
+
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                timer += 1 * Time.deltaTime;
+
+                if (timer >= 3)
+                {
+                    SceneManager.LoadScene(0);
+                }
+            }
+        }
     }
 }

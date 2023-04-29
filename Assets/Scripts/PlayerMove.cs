@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody rb;
     public float moveSpeed, jumpForce, slowdownMulti, sideStepForce, sideStepCooldown, airMulti, slamSpeed, stepCounter;
     private float extraJumpHeight = 0;
-    public bool grounded, crouching, sideStepped, hasControl;
+    public bool grounded, crouching, sideStepped, hasControl, isAlive;
     public float currentHealth, maxHealth;
 
     private void Start()
@@ -37,6 +37,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public bool ReturnIsAlive()
+    {
+        return isAlive;
+    }
+
     void UserInput()
     {
         //Allows for player movement relative to where the camera is looking
@@ -55,7 +60,7 @@ public class PlayerMove : MonoBehaviour
 
                 if (mag.magnitude > moveSpeed)
                 {
-                    rb.velocity = new Vector3(rb.velocity.x / slowdownMulti, rb.velocity.y, rb.velocity.z / slowdownMulti);
+                    rb.velocity = new Vector3(rb.velocity.x * slowdownMulti, rb.velocity.y, rb.velocity.z * slowdownMulti);
                 }
             }
 
@@ -67,7 +72,7 @@ public class PlayerMove : MonoBehaviour
 
         else
         {
-            rb.velocity = new Vector3(rb.velocity.x / slowdownMulti, rb.velocity.y, rb.velocity.z / slowdownMulti);
+            rb.velocity = new Vector3(rb.velocity.x * slowdownMulti, rb.velocity.y, rb.velocity.z * slowdownMulti);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && !sideStepped && !crouching && !grounded)
@@ -104,12 +109,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (!grounded)
         {
-            slowdownMulti = 1.03f;
+            slowdownMulti = Mathf.Pow(0.97f, Time.deltaTime / 0.0069f);
         }
 
         else if (grounded)
         {
-            slowdownMulti = Mathf.Lerp(slowdownMulti, 1.18f, 0.01f);
+            slowdownMulti = Mathf.Pow(Mathf.Lerp(slowdownMulti, 0.82f, 0.99f), Time.deltaTime / 0.0069f);
         }
 
         //Allows for the player to jump (v:jumpForce, v:grounded)
@@ -183,6 +188,11 @@ public class PlayerMove : MonoBehaviour
         return currentHealth;
     }
 
+    private void Awake()
+    {
+        isAlive = true;
+    }
+
     void Update()
     {
         if (!hasControl)
@@ -195,9 +205,20 @@ public class PlayerMove : MonoBehaviour
             stepCounter += (1 / sideStepCooldown) * Time.deltaTime;
         }
 
+        if (currentHealth <= 0)
+        {
+            isAlive = false;
+            hasControl = false;
+        }
+
         Jumping();
         Crouching();
         CheckGrounded();
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log(Time.deltaTime);
+        }
     }
 
     public float ReturnStepCounter()

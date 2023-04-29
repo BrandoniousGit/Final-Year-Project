@@ -173,12 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 0
-  explosiveRange: 8
+  explosiveRange: 6
   explosionDamage: 20
   explosiveShot: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  explosionSphere: {fileID: 6956054052435626322, guid: 0c1ea7a30571c7c47a0b0ea88b0e8ef5, type: 3}
 --- !u!135 &6462958416942741712
 SphereCollider:
   m_ObjectHideFlags: 0

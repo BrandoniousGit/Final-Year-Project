@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb1709601f90f346ae730419ac0a266, type: 3}
   m_Name: Dungeon
   m_EditorClassIdentifier: 
-  iTiles: []
+  iTiles:
+  - {fileID: 1184647836791499990, guid: c1de5daaefde6e541b9f0201a68349bc, type: 3}
   tTiles: []
-  hTiles: []
+  hTiles:
+  - {fileID: 8672791428213653675, guid: 6369814763668e74a9e754c911777988, type: 3}
   eTiles:
   - {fileID: 5356902556098981747, guid: a44337af30c4b3d4d8d2cf9a8cdb9c94, type: 3}
-  cTiles: []
+  cTiles:
+  - {fileID: 6975304165309068185, guid: 3fa7b8994bf6c634aa3ddb526ef9641c, type: 3}
   bossTile: []
-  m_minTiles: 10
+  m_minTiles: 5
   m_maxTiles: 20
-  m_iChance: 30
+  m_iChance: 35
   m_tChance: 0
   m_hChance: 0
-  m_eChance: 40
-  m_cChance: 30
+  m_eChance: 30
+  m_cChance: 35

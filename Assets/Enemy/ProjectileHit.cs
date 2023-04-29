@@ -8,6 +8,9 @@ public class ProjectileHit : MonoBehaviour
     public bool explosiveShot;
     public LayerMask playerLayer;
 
+    public GameObject explosionSphere;
+
+    private bool hasHit;
     private GameObject player;
 
     private void Awake()
@@ -19,18 +22,20 @@ public class ProjectileHit : MonoBehaviour
     {
         if (explosiveShot)
         {
+            GameObject explosionClone = Instantiate(explosionSphere, transform.position, transform.rotation);
+            explosionClone.transform.localScale = new Vector3(explosiveRange, explosiveRange, explosiveRange);
+
             if (Physics.CheckSphere(transform.position, explosiveRange, playerLayer, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log("Player Detected");
                 player.gameObject.GetComponent<PlayerMove>().TakeDamage(explosionDamage);
             }
-            Destroy(gameObject);
         }
 
         if (other.gameObject.tag == "Player")
         {
             player.gameObject.GetComponent<PlayerMove>().TakeDamage(projectileDamage);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 }

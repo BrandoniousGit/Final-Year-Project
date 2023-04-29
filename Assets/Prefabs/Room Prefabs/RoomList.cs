@@ -26,7 +26,6 @@ public class RoomList : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(this);
         navMesh = GetComponent<NavMeshSurface>();
         firstSpawn = GameObject.FindGameObjectWithTag("FirstSpawnPoint");
         levelReady = false;

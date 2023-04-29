@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3079152dd21b34640b66ef95239ea14e, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  m_model: {fileID: 5828008131436175625, guid: 39c09507136fd9c4f8135f2286a8e9d5, type: 3}
+  m_model: {fileID: 1236257789494122, guid: 8b0b86b42def11849a8eba21f4a6a684, type: 3}
   m_projectile: {fileID: 0}
   m_bulletTrail: {fileID: 2883528874004890972, guid: 9ee57f2e6cb60f046bff1546668974a5, type: 3}
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
@@ -20,12 +20,13 @@ MonoBehaviour:
   m_gunName: Shotgun
   m_gunDescription: 6 Pellet Shotgun
   m_invSlot: 1
-  m_ammoInClip: 6
+  m_ammoInClip: 2
   m_clipSize: 6
   m_burstCount: 0
   m_shotgunPelletCount: 6
-  m_damage: 1.2
+  m_damage: 8.4
   m_reloadTime: 2
   m_timeBetweenShot: 0.5
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0.1
+  m_aimSpread: 0

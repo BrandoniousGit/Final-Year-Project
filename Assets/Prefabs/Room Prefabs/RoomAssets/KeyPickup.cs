@@ -19,7 +19,7 @@ public class KeyPickup : Interactable
 
     public override void Interact()
     {
-        _levelManager.GetComponent<LevelManager>().SetPlayerHaveKey(true);
+        _levelManager.GetComponent<LevelManager>().SetPlayerHasKey(true);
         gameObject.SetActive(false);
     }
 }

@@ -8,17 +8,14 @@ public class EnemyCheckerScript : MonoBehaviour
     public List<GameObject> agents;
     public List<GameObject> aliveEnemies;
 
-    public EnemyList enemyManager;
-
     private LevelManager levelManager;
 
     public bool playerEnteredRoom, fightFinished, once, isEnemyRoom;
 
     public void Awake()
     {
-        enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyList>();
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        agents = enemyManager.GetEnemyList();
+        agents = levelManager.GetEnemyList();
         once = false;
         fightFinished = false;
         playerEnteredRoom = false;

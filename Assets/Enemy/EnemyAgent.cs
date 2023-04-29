@@ -15,7 +15,6 @@ public class EnemyAgent : MonoBehaviour
     private GameObject player;
     public NavMeshAgent agent;
 
-    public Vector3 heightOffset;
     public float m_currentHP;
     public bool m_alive;
 
