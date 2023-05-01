@@ -20,13 +20,14 @@ MonoBehaviour:
   m_gunName: Lobber
   m_gunDescription: Lobs Cats
   m_invSlot: 0
-  m_ammoInClip: 0
-  m_clipSize: 5
+  m_ammoInClip: 493
+  m_clipSize: 500
   m_burstCount: 0
   m_shotgunPelletCount: 0
-  m_damage: 20
+  m_damage: 40
   m_reloadTime: 1.2
   m_timeBetweenShot: 0.8
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
   m_aimSpread: 0
+  m_explosionSize: 0

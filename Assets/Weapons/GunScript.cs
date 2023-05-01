@@ -320,7 +320,7 @@ public class GunScript : MonoBehaviour
 
         GameObject clone = Instantiate(gunObject.m_projectile, weaponMuzzlePos, transform.rotation);
         clone.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(15f);
         Destroy(clone);
     }
 

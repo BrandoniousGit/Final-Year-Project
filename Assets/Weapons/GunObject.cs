@@ -23,5 +23,5 @@ public class GunObject : ScriptableObject
 
     public string m_gunName, m_gunDescription;
     public int m_invSlot, m_ammoInClip, m_clipSize, m_burstCount, m_shotgunPelletCount;
-    public float m_damage, m_reloadTime, m_timeBetweenShot, m_timeBetweenBurst, m_shotgunSpread, m_aimSpread;
+    public float m_damage, m_reloadTime, m_timeBetweenShot, m_timeBetweenBurst, m_shotgunSpread, m_aimSpread, m_explosionSize;
 }

@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+
 public class EnemyAgent : MonoBehaviour
 {
     public EnemyData enemyData;
@@ -81,8 +80,6 @@ public class EnemyAgent : MonoBehaviour
         if (m_currentHP <= 0)
         {
             OnDeadEvents();
-            gameObject.GetComponent<Rigidbody>().freezeRotation = false;
-            gameObject.GetComponent<Rigidbody>().useGravity = true;
             enemyCanvas.SetActive(false);
             m_alive = false;
             StartCoroutine("EnemyDie");
@@ -153,7 +150,7 @@ public class EnemyAgent : MonoBehaviour
 
     IEnumerator EnemyDie()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.01f);
         Destroy(parent.gameObject);
     }
 }

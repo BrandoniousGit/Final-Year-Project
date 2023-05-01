@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (IsLevelReady())
+        if (levelIsReady)
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
@@ -84,6 +84,11 @@ public class LevelManager : MonoBehaviour
 
                 if (timer >= 3)
                 {
+                    timer = 0;
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    levelIsReady = false;
                     SceneManager.LoadScene(0);
                 }
             }

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4925330303082584958}
   - component: {fileID: 486244506161253738}
   - component: {fileID: -6893313983505856189}
-  m_Layer: 8
+  - component: {fileID: -6976054860311079356}
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5479779351381918889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6752942684407545928}
@@ -172,6 +173,28 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-6976054860311079356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5479779351381918889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa1ce49310cb49408c5ad02e9dd8e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileDamage: 0
+  explosiveRange: 5.5
+  explosionDamage: 40
+  explosiveShot: 1
+  playerShot: 1
+  enemyShot: 0
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 1024
+  explosionSphere: {fileID: 6956054052435626322, guid: 0c1ea7a30571c7c47a0b0ea88b0e8ef5, type: 3}
 --- !u!1001 &6502631522067163043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 528465243e8dc7e4aa0f7de63d4127cb, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528465243e8dc7e4aa0f7de63d4127cb, type: 3}

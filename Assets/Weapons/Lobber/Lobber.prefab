@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33092926340133414}
   - component: {fileID: 23100547221564144}
   - component: {fileID: 7972812981142545590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lobber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4525525179064062}
   - component: {fileID: 33625029223417904}
   - component: {fileID: 23391533617881980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 745028551075015752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunFront
   m_TagString: GunFront
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281747968086043001}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.005, z: -0.364}
+  m_LocalPosition: {x: -0, y: -0.005, z: -0.391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

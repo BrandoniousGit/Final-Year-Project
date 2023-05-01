@@ -272,6 +272,9 @@ MonoBehaviour:
   explosiveRange: 0
   explosionDamage: 0
   explosiveShot: 0
-  playerLayer:
+  playerShot: 0
+  enemyShot: 1
+  layersToHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  explosionSphere: {fileID: 0}
