@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BossDoorScript : Interactable
 {
-    public GameObject _levelManager;
+    private LevelManager _levelManager;
 
     public override string GetDescription()
     {
-        if (_levelManager.GetComponent<LevelManager>().DoesPlayerHaveKey())
+        if (_levelManager.DoesPlayerHaveKey())
         {
             return "Press 'E' to Unlock";
         }
@@ -18,14 +18,14 @@ public class BossDoorScript : Interactable
 
     public void Awake()
     {
-        _levelManager = GameObject.FindGameObjectWithTag("LevelManager");
+        _levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     public override void Interact()
     {
-        if (_levelManager.GetComponent<LevelManager>().DoesPlayerHaveKey())
+        if (_levelManager.DoesPlayerHaveKey())
         {
-            Debug.Log("I am running");
+            _levelManager.NextStage();
         }
     }
 }

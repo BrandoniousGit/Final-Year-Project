@@ -18,9 +18,9 @@ MonoBehaviour:
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
   m_gunType: 2
   m_gunName: Pistol
-  m_gunDescription: Trusty Pistol
+  m_gunDescription: Standard PIstol
   m_invSlot: 0
-  m_ammoInClip: 19
+  m_ammoInClip: 6
   m_clipSize: 20
   m_burstCount: 0
   m_shotgunPelletCount: 0
@@ -30,3 +30,4 @@ MonoBehaviour:
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
   m_aimSpread: 0.01
+  m_explosionSize: 0

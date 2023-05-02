@@ -27,6 +27,7 @@ TagManager:
   - EnemyManager
   - InteractionText
   - NavMesh
+  - Terrain
   layers:
   - Default
   - TransparentFX

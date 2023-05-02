@@ -18,10 +18,10 @@ MonoBehaviour:
   m_ImpactParticleSystem: {fileID: 0}
   m_gunType: 4
   m_gunName: Lobber
-  m_gunDescription: Lobs Cats
+  m_gunDescription: Heavy Hitting | Area damage
   m_invSlot: 0
-  m_ammoInClip: 493
-  m_clipSize: 500
+  m_ammoInClip: 8
+  m_clipSize: 8
   m_burstCount: 0
   m_shotgunPelletCount: 0
   m_damage: 40

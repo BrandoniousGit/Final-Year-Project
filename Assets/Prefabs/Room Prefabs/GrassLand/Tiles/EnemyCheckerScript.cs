@@ -29,7 +29,7 @@ public class EnemyCheckerScript : MonoBehaviour
             {
                 float randomX = Random.Range(-10.0f, 10.0f);
                 float randomZ = Random.Range(-10.0f, 10.0f);
-                aliveEnemies.Add(Instantiate(agents[Random.Range(0, 2)], new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ), transform.rotation));
+                aliveEnemies.Add(Instantiate(agents[Random.Range(0, levelManager.enemies.Count)], new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ), transform.rotation));
             }
             once = true;
         }

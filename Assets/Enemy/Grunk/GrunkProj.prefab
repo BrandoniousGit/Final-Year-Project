@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4398914373910980547}
   m_Layer: 8
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,11 +94,10 @@ GameObject:
   - component: {fileID: 620759123227082553}
   - component: {fileID: 693651925827971674}
   - component: {fileID: 3234174770046947416}
-  - component: {fileID: -4563769987995413516}
   - component: {fileID: 4291469053852406815}
   m_Layer: 8
   m_Name: GrunkProj
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,19 +242,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!135 &-4563769987995413516
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3742187596627723230}
-  m_Material: {fileID: 13400000, guid: 61bb5795738bc1f4a9eef75b91a5b427, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4291469053852406815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,10 +257,14 @@ MonoBehaviour:
   projectileDamage: 9
   explosiveRange: 0
   explosionDamage: 0
+  projectileSize: 0.1
   explosiveShot: 0
   playerShot: 0
   enemyShot: 1
   layersToHit:
+    serializedVersion: 2
+    m_Bits: 64
+  layersToDamage:
     serializedVersion: 2
     m_Bits: 64
   explosionSphere: {fileID: 0}

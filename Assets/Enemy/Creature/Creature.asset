@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6665ca60eddb39e439566f9cb08b50e9, type: 3}
+  m_Name: Creature
+  m_EditorClassIdentifier: 
+  m_model: {fileID: 6332239942888153607, guid: 852ff49ffdf52f14984b5320e8e25dd2, type: 3}
+  m_projectile: {fileID: 3742187596627723230, guid: 38e49d98472fd1044b3a844184cd36dd, type: 3}
+  m_attackOffset: {x: 0, y: 0, z: 0}
+  m_enemyId: 2
+  m_maxHP: 10
+  m_damage: 0
+  m_moveSpeed: 10
+  m_name: Creature

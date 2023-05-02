@@ -4,70 +4,41 @@ using UnityEngine;
 
 public class ProjectileHit : MonoBehaviour
 {
-    public float projectileDamage, explosiveRange, explosionDamage;
+    public float projectileDamage, explosiveRange, explosionDamage, projectileSize;
     public bool explosiveShot, playerShot, enemyShot;
-    public LayerMask layersToHit;
+    public LayerMask layersToHit, layersToDamage;
 
     public GameObject explosionSphere;
 
-    private bool hasHit;
     private GameObject player;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        Destroy(gameObject, 10.0f);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void Update()
     {
-        //For when the enemy shoots a projectile
-        if (enemyShot)
+        if (explosiveShot)
         {
-            if (explosiveShot)
+            if (Physics.CheckSphere(transform.position, projectileSize, layersToHit, QueryTriggerInteraction.Ignore))
             {
                 GameObject explosionClone = Instantiate(explosionSphere, transform.position, transform.rotation);
                 explosionClone.transform.localScale = new Vector3(explosiveRange, explosiveRange, explosiveRange);
 
-                if (Physics.CheckSphere(transform.position, explosiveRange, layersToHit, QueryTriggerInteraction.Ignore))
+                if (Physics.CheckSphere(transform.position, explosiveRange, layersToDamage, QueryTriggerInteraction.Ignore))
                 {
                     player.gameObject.GetComponent<PlayerMove>().TakeDamage(explosionDamage);
                 }
-            }
-
-            if (other.gameObject.tag == "Player")
-            {
-                player.gameObject.GetComponent<PlayerMove>().TakeDamage(projectileDamage);
+                Destroy(gameObject);
             }
         }
 
-        //For when the player shoots a projectile
-        if (playerShot)
+        else if (Physics.CheckSphere(transform.position, projectileSize, layersToDamage, QueryTriggerInteraction.Ignore))
         {
-            if (explosiveShot)
-            {
-                GameObject explosionClone = Instantiate(explosionSphere, transform.position, transform.rotation);
-                explosionClone.transform.localScale = new Vector3(explosiveRange, explosiveRange, explosiveRange);
-
-                if (Physics.CheckSphere(transform.position, explosiveRange, layersToHit, QueryTriggerInteraction.Ignore))
-                {
-                    Collider[] enemiesHit = Physics.OverlapSphere(transform.position, explosiveRange, layersToHit, QueryTriggerInteraction.Ignore);
-
-                    for (int i = 0; i < enemiesHit.Length; i++)
-                    {
-                        if (enemiesHit[i].GetComponent<EnemyAgent>() != null)
-                        {
-                            enemiesHit[i].gameObject.GetComponent<EnemyAgent>().TakeDamage(explosionDamage);
-                        }
-                    }
-                }
-            }
-
-            else if (!explosiveShot && other.gameObject.GetComponentInChildren<EnemyAgent>() != null)
-            {
-                other.gameObject.GetComponentInChildren<EnemyAgent>().TakeDamage(projectileDamage);
-            }
+            player.gameObject.GetComponent<PlayerMove>().TakeDamage(projectileDamage);
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 }

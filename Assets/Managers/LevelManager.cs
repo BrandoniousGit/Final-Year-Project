@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     private bool hasKey;
     private bool levelIsReady;
+    private int currentStage;
     public Environment currentEnvironment;
     public Environment backupEnvironment;
 
@@ -93,5 +94,11 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void NextStage()
+    {
+        SetEnvironmentByID(Random.Range(0, 3));
+        SceneManager.LoadScene(1);
     }
 }

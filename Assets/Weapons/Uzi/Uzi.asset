@@ -18,9 +18,9 @@ MonoBehaviour:
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
   m_gunType: 1
   m_gunName: Uzi
-  m_gunDescription: Pew
+  m_gunDescription: Low Accuracy | High Rate of Fire
   m_invSlot: 1
-  m_ammoInClip: 0
+  m_ammoInClip: 65
   m_clipSize: 65
   m_burstCount: 0
   m_shotgunPelletCount: 0
@@ -30,3 +30,4 @@ MonoBehaviour:
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
   m_aimSpread: 0.08
+  m_explosionSize: 0
