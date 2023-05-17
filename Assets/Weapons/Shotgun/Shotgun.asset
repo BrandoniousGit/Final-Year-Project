@@ -16,18 +16,20 @@ MonoBehaviour:
   m_projectile: {fileID: 0}
   m_bulletTrail: {fileID: 2883528874004890972, guid: 9ee57f2e6cb60f046bff1546668974a5, type: 3}
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
+  m_shotSound: {fileID: 8300000, guid: 75fac4c8f4cb20943a6ddfa4244dd04f, type: 3}
   m_gunType: 3
   m_gunName: Shotgun
   m_gunDescription: Good with close range targets
   m_invSlot: 1
-  m_ammoInClip: 6
+  m_ammoInClip: 0
   m_clipSize: 6
   m_burstCount: 0
-  m_shotgunPelletCount: 6
-  m_damage: 8.4
+  m_shotgunPelletCount: 8
+  m_damage: 3.6
   m_reloadTime: 2
   m_timeBetweenShot: 0.5
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0.1
   m_aimSpread: 0
   m_explosionSize: 0
+  m_damageFalloff: {x: 5, y: 10}

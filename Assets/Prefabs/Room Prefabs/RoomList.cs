@@ -72,7 +72,7 @@ public class RoomList : MonoBehaviour
                 keyRoom = Random.Range(1, roomCount - 1);
             }
 
-            while (rooms[chestRoom].GetComponent<LG_Add>().bossDoor)
+            while (rooms[chestRoom].GetComponent<LG_Add>().bossDoor || chestRoom == keyRoom)
             {
                 chestRoom = Random.Range(1, roomCount - 1);
             }

@@ -16,6 +16,7 @@ MonoBehaviour:
   m_projectile: {fileID: 0}
   m_bulletTrail: {fileID: 2883528874004890972, guid: c302862cd41a81e40be7d66bcf849489, type: 3}
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
+  m_shotSound: {fileID: 8300000, guid: 252e8ffa3b6da0c488cba5e7588dfa95, type: 3}
   m_gunType: 2
   m_gunName: Pistol
   m_gunDescription: Standard PIstol
@@ -31,3 +32,4 @@ MonoBehaviour:
   m_shotgunSpread: 0
   m_aimSpread: 0.01
   m_explosionSize: 0
+  m_damageFalloff: {x: 10, y: 20}

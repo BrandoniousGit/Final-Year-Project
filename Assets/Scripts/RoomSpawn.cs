@@ -136,7 +136,8 @@ public class RoomSpawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("FirstSpawnPoint"))
+        //Check for if the colliding object is the origin of the level
+        if (other.CompareTag("FirstSpawnPoint"))
         {
             canSpawnRoom = false;
             return;
@@ -149,11 +150,11 @@ public class RoomSpawn : MonoBehaviour
             {
                 canSpawnRoom = false;
             }
+
             if (other.gameObject.GetComponent<RoomSpawn>().canSpawnRoom && canSpawnRoom)
             {
                 canSpawnRoom = false;
                 ConflictSpawn(transform.position, transform.rotation);
-                //Debug.Log("Conflict at\nX: " + transform.position.x / 32 + "\nZ: " + transform.position.z / 32);
             }
         }
     }

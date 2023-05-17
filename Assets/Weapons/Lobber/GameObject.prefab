@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 0
-  explosiveRange: 5.5
-  explosionDamage: 30
+  explosiveRange: 3.25
+  explosionDamage: 9
   explosiveShot: 1
   playerShot: 1
   enemyShot: 0

@@ -16,18 +16,20 @@ MonoBehaviour:
   m_projectile: {fileID: 5479779351381918889, guid: e813ebc7e3524cf49bfe43087d0c83fe, type: 3}
   m_bulletTrail: {fileID: 0}
   m_ImpactParticleSystem: {fileID: 0}
+  m_shotSound: {fileID: 0}
   m_gunType: 4
   m_gunName: Lobber
   m_gunDescription: Heavy Hitting | Area damage
   m_invSlot: 0
-  m_ammoInClip: 8
-  m_clipSize: 8
+  m_ammoInClip: 12
+  m_clipSize: 12
   m_burstCount: 0
   m_shotgunPelletCount: 0
-  m_damage: 40
+  m_damage: 9
   m_reloadTime: 1.2
-  m_timeBetweenShot: 0.8
+  m_timeBetweenShot: 0.4
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
   m_aimSpread: 0
   m_explosionSize: 0
+  m_damageFalloff: {x: 999, y: 999}

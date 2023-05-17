@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_model: {fileID: 6332239942888153607, guid: d9e3c72b35484274fb9b173f31b53915, type: 3}
   m_projectile: {fileID: 3742187596627723230, guid: 9b4ee35f2e962e6408c592601da550cb, type: 3}
-  m_maxHP: 45
+  m_attackOffset: {x: 0, y: 0, z: 0}
+  m_enemyId: 0
+  m_maxHP: 35
   m_damage: 5
   m_moveSpeed: 1
   m_name: Grunk

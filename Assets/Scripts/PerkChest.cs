@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PerkChest : Interactable
 {
+    public GameObject perk1Spawn, perk2Spawn;
     GameObject perk1, perk2;
 
     public override string GetDescription()
@@ -22,8 +23,9 @@ public class PerkChest : Interactable
     {
         if (isSelected == false)
         {
-            perk1 = Instantiate(m_genericObject, transform.position + new Vector3(0, 1, 0.6f), new Quaternion(0, 0, 0, 1));
-            perk2 = Instantiate(m_genericObject, transform.position + new Vector3(0, 1, -0.6f), new Quaternion(0, 0, 0, 1));
+            gameObject.GetComponent<Animator>().SetTrigger("ChestOpened");
+            perk1 = Instantiate(m_genericObject, perk1Spawn.transform.position, new Quaternion(0, 0, 0, 1));
+            perk2 = Instantiate(m_genericObject, perk2Spawn.transform.position, new Quaternion(0, 0, 0, 1));
             isSelected = true;
         }
 

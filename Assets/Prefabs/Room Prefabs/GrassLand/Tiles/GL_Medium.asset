@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iTiles:
   - {fileID: 3503337976478349299, guid: 708284a5724538847949c9fcca039a52, type: 3}
+  - {fileID: 9084679147519370865, guid: 77ea4c0352896504eae41ce78d1b2136, type: 3}
   tTiles:
   - {fileID: 2729221315582619250, guid: ceeed96837addbd4c97ce255bf273269, type: 3}
   hTiles:
+  - {fileID: 1473544713067576068, guid: c334a9a17ae7a924ba3e3828dab9b45c, type: 3}
   - {fileID: 8672791428213653675, guid: 6369814763668e74a9e754c911777988, type: 3}
   eTiles:
   - {fileID: 3951228642117292780, guid: 8811b9437b1049e45b039bdfdd5291ec, type: 3}
   - {fileID: 836704410672486230, guid: 81e75795877a45e4ba886cc98b318a8a, type: 3}
   cTiles:
   - {fileID: 5460155077721692743, guid: 65f024e7bd029e84ba2863f9b5e5f652, type: 3}
+  - {fileID: 2613067619380479438, guid: fc9d05b25935ed0428b0e30dc0812fe2, type: 3}
   bossTile:
   - {fileID: 0}
   m_minTiles: 10

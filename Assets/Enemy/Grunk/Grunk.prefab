@@ -358,9 +358,9 @@ MonoBehaviour:
   agent: {fileID: 534196708324995}
   m_currentHP: 0
   m_alive: 0
-  attackRange: 7
+  attackRange: 9
   playerInAttackRange: 0
-  sightRange: 15
+  sightRange: 25
   playerInSightRange: 0
   timeBetweenAttacksMin: 1.2
   timeBetweenAttacksMax: 1.25

@@ -299,8 +299,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   sightRange: 50
   playerInSightRange: 0
-  timeBetweenAttacksMin: 0.18
-  timeBetweenAttacksMax: 0.22
+  timeBetweenAttacksMin: 0.15
+  timeBetweenAttacksMax: 0.3
   canAttack: 0
   shotForce: 3600
   playerLayer:

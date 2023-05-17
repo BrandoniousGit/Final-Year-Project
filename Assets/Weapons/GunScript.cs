@@ -128,6 +128,13 @@ public class GunScript : MonoBehaviour
                     gunObject.m_ammoInClip -= 1;
                     m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
+
+                    AudioSource shotAudio = gameObject.GetComponent<AudioSource>();
+                    if (shotAudio.clip != gunObject.m_shotSound)
+                    {
+                        shotAudio.clip = gunObject.m_shotSound;
+                    }
+                    shotAudio.Play();
                 }
                 break;
 
@@ -139,6 +146,13 @@ public class GunScript : MonoBehaviour
                     gunObject.m_ammoInClip -= 1;
                     m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
+
+                    AudioSource shotAudio = gameObject.GetComponent<AudioSource>();
+                    if (shotAudio.clip != gunObject.m_shotSound)
+                    {
+                        shotAudio.clip = gunObject.m_shotSound;
+                    }
+                    shotAudio.Play();
                 }
                 break;
 
@@ -150,6 +164,13 @@ public class GunScript : MonoBehaviour
                     gunObject.m_ammoInClip -= 1;
                     m_currentWeapon.gameObject.GetComponent<Animator>().SetTrigger("Shoot");
                     StartCoroutine("ShotDelay", gunObject.m_timeBetweenShot);
+
+                    AudioSource shotAudio = gameObject.GetComponent<AudioSource>();
+                    if (shotAudio.clip != gunObject.m_shotSound)
+                    {
+                        shotAudio.clip = gunObject.m_shotSound;
+                    }
+                    shotAudio.Play();
                 }
                 break;
 
@@ -268,6 +289,9 @@ public class GunScript : MonoBehaviour
 
     void WhatDidIHit(RaycastHit _hit)
     {
+        float fallOffMultiplier;
+        float diff = gunObject.m_damageFalloff.y - gunObject.m_damageFalloff.x;
+
         if (_hit.transform.gameObject.GetComponent<EnemyAgent>() == null)
         {
             Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
@@ -275,7 +299,30 @@ public class GunScript : MonoBehaviour
         }
 
         Instantiate(gunObject.m_ImpactParticleSystem, _hit.point, Quaternion.LookRotation(_hit.normal));
-        _hit.transform.gameObject.GetComponent<EnemyAgent>().TakeDamage(damage);
+
+        //Checking damage falloff
+        if (_hit.distance > gunObject.m_damageFalloff.y)
+        {
+            fallOffMultiplier = 0;
+        }
+
+        else if  (_hit.distance >= gunObject.m_damageFalloff.x && _hit.distance < gunObject.m_damageFalloff.y)
+        {
+            fallOffMultiplier = 1 - (_hit.distance - gunObject.m_damageFalloff.x) / diff;
+
+            if (fallOffMultiplier > 1)
+            {
+                fallOffMultiplier = 1;
+            }
+        }
+
+        else
+        {
+            fallOffMultiplier = 1;
+        }
+
+        //Applying damage to hit enemy
+        _hit.transform.gameObject.GetComponent<EnemyAgent>().TakeDamage(damage * fallOffMultiplier);
     }
 
     public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
@@ -305,7 +352,7 @@ public class GunScript : MonoBehaviour
         while (distance > 0)
         {
             _trail.transform.position = Vector3.Lerp(_trail.transform.position, _hit, 1 - (distance / startDistance));
-            distance -= Time.deltaTime * 300;
+            distance -= Time.deltaTime * 500;
 
             yield return null;
         }

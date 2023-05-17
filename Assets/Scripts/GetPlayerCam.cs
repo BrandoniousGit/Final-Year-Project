@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +7,7 @@ public class GetPlayerCam : MonoBehaviour
     private PlayerMove playerScript;
     private GameObject _levelManager;
     public Image sidestepBar, healthBar;
-    public GameObject allHolder, deathMessage;
+    public GameObject allHolder, deathMessage, weaponHolder;
 
     private float timer;
 

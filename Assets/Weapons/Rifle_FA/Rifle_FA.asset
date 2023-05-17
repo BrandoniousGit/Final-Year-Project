@@ -16,11 +16,12 @@ MonoBehaviour:
   m_projectile: {fileID: 0}
   m_bulletTrail: {fileID: 2883528874004890972, guid: bdcb4c1932ef49941973590caad413b8, type: 3}
   m_ImpactParticleSystem: {fileID: 730222251750798745, guid: 768efa93b40686b4cb090d7c4fa5bf4d, type: 3}
+  m_shotSound: {fileID: 8300000, guid: 86483e4bfc70ec949a6ff48bbbd599d9, type: 3}
   m_gunType: 1
   m_gunName: Full Auto Rifle
   m_gunDescription: Standard Fully Automatic Rifle
   m_invSlot: 1
-  m_ammoInClip: 35
+  m_ammoInClip: 24
   m_clipSize: 35
   m_burstCount: 3
   m_shotgunPelletCount: 0
@@ -30,3 +31,5 @@ MonoBehaviour:
   m_timeBetweenBurst: 0
   m_shotgunSpread: 0
   m_aimSpread: 0.03
+  m_explosionSize: 0
+  m_damageFalloff: {x: 10, y: 30}
